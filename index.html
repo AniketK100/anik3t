@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aniket Kakad — Software Developer</title>
+  <meta name="description" content="Aniket Kakad is a software developer from Mumbai building real-time, AI-powered products — WebRTC classrooms, 99-language captioning engines and sub-100ms infrastructure.">
+  <meta name="theme-color" content="#0E0E10">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <noscript>
+    <style>
+      .preloader, .cursor, .menu { display: none !important; }
+      [data-reveal], [data-hero-fade] { opacity: 1 !important; }
+    </style>
+  </noscript>
+</head>
+<body>
+
+  <a class="skip" href="#profile">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="pre__inner">
+      <span class="pre__kick">PORTFOLIO © 2026 — MUMBAI, IN</span>
+      <span class="pre__name">ANIKET<em>.</em>KAKAD</span>
+      <span class="pre__line"><i id="preLine"></i></span>
+      <span class="pre__status">
+        <span class="pre__skill" id="preSkill">LOADING // FULL-STACK ENGINE</span>
+        <span class="pre__count" id="preCount">000</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-head" id="siteHead">
+    <a class="head__logo" href="#top" aria-label="Back to top">
+      AK<span class="head__logo-yr">/26</span>
+    </a>
+
+    <nav class="head__nav" aria-label="Primary">
+      <a href="#profile"><span class="n">01</span>Profile</a>
+      <a href="#experience"><span class="n">02</span>Experience</a>
+      <a href="#work"><span class="n">03</span>Projects</a>
+      <a href="#stack"><span class="n">04</span>Stack</a>
+      <a href="#contact"><span class="n">05</span>Contact</a>
+    </nav>
+
+    <div class="head__right">
+      <span class="head__clock" id="clock" aria-hidden="true">--:--:--</span>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__nav" aria-label="Mobile">
+      <a href="#profile" class="menu__link"><span>01</span>Profile</a>
+      <a href="#experience" class="menu__link"><span>02</span>Experience</a>
+      <a href="#work" class="menu__link"><span>03</span>Projects</a>
+      <a href="#stack" class="menu__link"><span>04</span>Stack</a>
+      <a href="#contact" class="menu__link"><span>05</span>Contact</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="mailto:aniketkakad8282@gmail.com">aniketkakad8282@gmail.com</a>
+      <span>Mumbai, India</span>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-label="Introduction">
+      <canvas id="asciiBgCanvas" class="hero__bg-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero__meta">
+        <span class="hero__meta-item" data-hero-fade>PORTFOLIO — 2026</span>
+        <span class="hero__meta-item" data-hero-fade>MUMBAI, IN</span>
+      </div>
+
+      <div class="hero__title-wrap">
+        <h1 class="hero__title" aria-label="Aniket Kakad">
+          <span class="hero__line" data-hero-line>ANIKET</span>
+          <span class="hero__line" data-hero-line>KAKAD<span class="hero__dot">.</span></span>
+        </h1>
+        <div class="hero__portrait-wrap" aria-hidden="true">
+          <canvas id="asciiCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="hero__bottom">
+        <p class="hero__lead" data-hero-fade>
+          I build real-time, AI-powered software — WebRTC classrooms, captioning
+          engines in 99+ languages, and platforms tuned to answer in under 100ms.
+        </p>
+        <a class="hero__scroll" href="#profile" data-hero-fade>
+          <span>SCROLL</span><i aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <div class="marquee hero__marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>REAL-TIME SYSTEMS <i>+</i> AI INTEGRATION <i>+</i> FULL-STACK <i>+</i> MERN <i>+</i> SECURITY <i>+</i> PERFORMANCE <i>+</i> MUMBAI <i>+</i></span>
+          <span>REAL-TIME SYSTEMS <i>+</i> AI INTEGRATION <i>+</i> FULL-STACK <i>+</i> MERN <i>+</i> SECURITY <i>+</i> PERFORMANCE <i>+</i> MUMBAI <i>+</i></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 01 PROFILE ============ -->
+    <section class="sec" id="profile">
+      <header class="sec__head">
+        <span class="sec__idx">01</span>
+        <span class="sec__rule" aria-hidden="true"></span>
+        <h2 class="sec__title" data-reveal>Profile</h2>
+      </header>
+
+      <div class="profile">
+        <div class="profile__main">
+          <p class="stmt" data-lines>
+            I'm a computer engineering graduate of Watumull Institute of
+            Engineering &amp; Technology, Ulhasnagar. My work spans the full
+            stack — MERN and Spring Boot — with a focus on real-time
+            communication, AI-driven features and security-hardened APIs.
+          </p>
+          <p class="stmt stmt--2" data-lines>
+            As an intern at MSRDC, I built live video classrooms and an AI quiz
+            engine. My projects range from a 99-language captioning platform to
+            a Redis-cached URL shortener that answers in under 100ms.
+          </p>
+        </div>
+
+        <aside class="profile__aside">
+          <dl class="facts">
+            <div class="facts__row" data-reveal><dt>Name</dt><dd>Aniket Kakad</dd></div>
+            <div class="facts__row" data-reveal><dt>Based in</dt><dd>Mumbai, India</dd></div>
+            <div class="facts__row" data-reveal><dt>Degree</dt><dd>BE Computer Engineering</dd></div>
+            <div class="facts__row" data-reveal><dt>Institute</dt><dd>Watumull Institute of Engineering &amp; Technology</dd></div>
+            <div class="facts__row" data-reveal><dt>Years</dt><dd>2022 — 2026</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 02 EXPERIENCE ============ -->
+    <section class="sec" id="experience">
+      <header class="sec__head">
+        <span class="sec__idx">02</span>
+        <span class="sec__rule" aria-hidden="true"></span>
+        <h2 class="sec__title" data-reveal>Experience</h2>
+      </header>
+
+      <article class="exp">
+        <div class="exp__head" data-reveal>
+          <div class="exp__titles">
+            <h3>Software Development Intern</h3>
+            <p class="exp__org"><a href="http://msrdcenter.in/" target="_blank" rel="noopener">MSRDC / Maharashtra Softwares Research And Development Center</a></p>
+          </div>
+          <div class="exp__dates">
+            <span>JUN — AUG</span><span>2026</span>
+          </div>
+        </div>
+
+        <div class="exp__proj" data-reveal>
+          <span class="exp__proj-name">Zenius AI</span>
+          <span class="exp__proj-stack">MERN · WEBRTC · SOCKET.IO</span>
+        </div>
+
+        <ol class="exp__log">
+          <li class="exp__item" data-reveal>
+            <span class="exp__item-idx">[01]</span>
+            <p>Built a real-time e-learning platform with WebRTC and Socket.IO — live video classrooms with screen sharing and live chat.</p>
+          </li>
+          <li class="exp__item" data-reveal>
+            <span class="exp__item-idx">[02]</span>
+            <p>Developed an AI quiz generator on the Gemini API that extracts questions from uploaded course documents automatically.</p>
+          </li>
+          <li class="exp__item" data-reveal>
+            <span class="exp__item-idx">[03]</span>
+            <p>Implemented CSRF protection, input sanitization and URL validation to prevent NoSQL injection and SSRF attacks.</p>
+          </li>
+          <li class="exp__item" data-reveal>
+            <span class="exp__item-idx">[04]</span>
+            <p>Built student, instructor and admin dashboards with course enrollment, progress tracking and automatic attendance logging.</p>
+          </li>
+        </ol>
+
+        <div class="exp__links" data-reveal>
+          <a class="link-arr" href="https://live-meet.onrender.com/" target="_blank" rel="noopener">
+            Live demo <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 11 11 1M4 1h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+          <a class="link-arr" href="https://github.com/Mediwateyash/Live-Meet" target="_blank" rel="noopener">
+            GitHub <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 11 11 1M4 1h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ 03 PROJECTS ============ -->
+    <section class="sec" id="work">
+      <header class="sec__head">
+        <span class="sec__idx">03</span>
+        <span class="sec__rule" aria-hidden="true"></span>
+        <h2 class="sec__title" data-reveal>Projects</h2>
+      </header>
+
+      <p class="sec__sub" data-reveal>A selection of things I've designed, built, contributed, and shipped.</p>
+
+      <div class="work-rows">
+
+        <!-- PROJECT 01: Zenius AI -->
+        <article class="proj-row" data-reveal data-proj-id="zenius" data-modal-desc="A real-time e-learning platform built at MSRDC — WebRTC live video classrooms with screen sharing, an AI quiz generator powered by the Gemini API, and role-based dashboards for students, instructors and admins with progress tracking and automatic attendance.">
+          <div class="proj-row__prev">
+            <span class="proj-row__badge">INTERNSHIP PROJECT</span>
+            <img src="assets/zenius.png" alt="Zenius AI — AI MCQ &amp; Test Platform" loading="eager" draggable="false" />
+          </div>
+          <div class="proj-row__body">
+            <div class="proj-row__head">
+              <h3 class="proj-row__title">ZENIUS AI</h3>
+            </div>
+            <p class="proj-row__desc">AI-powered learning: courses, live lectures, smart quizzes &amp; certificates.</p>
+            <div class="proj-row__pills">
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#000"/><path d="M17.17 17.51l-4.52-6.55v6.55h-1.63V7.2h1.63l4.52 6.55V7.2h1.63v10.31h-1.63zM7.2 7.2h1.63v9.6H7.2V7.2z" fill="#fff"/></svg> Next.js</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 6c-3.3 0-5.5 1.7-6.6 5 1.1-1.7 2.5-2.2 4.1-1.7 1 .3 1.7 1 2.5 1.8C13.3 12.4 15 14 18.6 14c3.3 0 5.5-1.7 6.6-5-1.1 1.7-2.5 2.2-4.1 1.7-1-.3-1.7-1-2.5-1.8C17.3 7.6 15.6 6 12 6zm-6.6 6C2.1 12 0 13.7-1.1 17c1.1-1.7 2.5-2.2 4.1-1.7 1 .3 1.7 1 2.5 1.8C6.8 18.4 8.5 20 12 20c3.3 0 5.5-1.7 6.6-5-1.1 1.7-2.5 2.2-4.1 1.7-1-.3-1.7-1-2.5-1.8-1.3-1.3-3-2.9-6.6-2.9z" fill="#38BDF8"/></svg> Tailwind CSS</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 0c-.3 0-.6.1-.8.4L3.8 8.8c-1.1 1.3-1.8 3-1.8 4.9 0 4.4 3.6 8 8 8s8-3.6 8-8c0-1.9-.7-3.6-1.8-4.9L12.8.4c-.2-.3-.5-.4-.8-.4zm.9 2.5l5.5 6.7c.9 1.1 1.4 2.5 1.4 4 0 3.2-2.5 5.8-5.7 6-.4-.3-.6-.8-.6-1.3V3.1c-.2-.2-.4-.4-.6-.6zm-1.8 0c-.2.2-.4.4-.6.6v14.8c0 .5-.2 1-.6 1.3-3.2-.2-5.7-2.8-5.7-6 0-1.5.5-2.9 1.4-4l5.5-6.7z" fill="#47A248"/></svg> MongoDB</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7.7v11.5L12 25l10-5.8V7.7L12 2zm-1 15.8h-2v-6.5h2v6.5zm-1-7.8c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2zm6 7.8h-2v-3.5c0-.8-.6-1.5-1.5-1.5S11 13.7 11 14.5v3.5H9v-6.5h2v.9c.5-.6 1.3-1 2.2-1 1.8 0 3.3 1.5 3.3 3.3v3.3z" fill="#5FA04E"/></svg> Node.js</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="1.5"/><path d="M13 6l-5 7h4l-1 5 5-7h-4l1-5z" fill="#fff"/></svg> Socket.IO</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="12" r="4" fill="#336699"/><circle cx="17" cy="12" r="4" fill="#FF9900"/><path d="M10 10l4 4M14 10l-4 4" stroke="#fff" stroke-width="1.5"/></svg> WebRTC</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 7.523 7.523 12 2 12c5.523 0 10 4.477 10 10 0-5.523 4.477-10 10-10-5.523 0-10-4.477-10-10z" fill="url(#gemini-z)"/><defs><linearGradient id="gemini-z" x1="2" y1="2" x2="22" y2="22"><stop stop-color="#1A73E8"/><stop offset="0.5" stop-color="#8E24AA"/><stop offset="1" stop-color="#D93025"/></linearGradient></defs></svg> Gemini API</span>
+            </div>
+            <div class="proj-row__actions">
+              <a class="proj-btn proj-btn--github" href="https://github.com/Mediwateyash/Live-Meet" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub
+              </a>
+              <a class="proj-btn proj-btn--live-red" href="https://live-meet.onrender.com/" target="_blank" rel="noopener">
+                <i class="live-dot"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 02: CaptionFlow -->
+        <article class="proj-row" data-reveal data-proj-id="captionflow" data-modal-desc="AI video captioning in 99+ languages. Groq Whisper and Sarvam AI transcribe with automatic provider fallback, word-level timestamps stay in sync via LCS matching, and FFmpeg renders styled subtitles into videos for shorts, reels and landscape formats.">
+          <div class="proj-row__prev">
+            <img src="assets/captionflow.png" alt="CaptionFlow — AI Video Captioning Platform" loading="eager" draggable="false" />
+          </div>
+          <div class="proj-row__body">
+            <div class="proj-row__head">
+              <h3 class="proj-row__title">CAPTIONFLOW</h3>
+            </div>
+            <p class="proj-row__desc">AI captions in 99+ languages with styled subtitle video export.</p>
+            <div class="proj-row__pills">
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="2" fill="#61DAFB"/></svg> React</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7.7v11.5L12 25l10-5.8V7.7L12 2zm-1 15.8h-2v-6.5h2v6.5zm-1-7.8c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2zm6 7.8h-2v-3.5c0-.8-.6-1.5-1.5-1.5S11 13.7 11 14.5v3.5H9v-6.5h2v.9c.5-.6 1.3-1 2.2-1 1.8 0 3.3 1.5 3.3 3.3v3.3z" fill="#5FA04E"/></svg> Node.js</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#259D9A"/><path d="M7 8l4 8M15 8l-4 8M14 13h5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> Express.js</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#007808"/><path d="M6 7h12M6 12h8M6 17h12" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> FFmpeg</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#F55036"/><path d="M8 12a4 4 0 108 0 4 4 0 10-8 0" fill="#fff"/></svg> Groq Whisper</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#7C3AED"/><path d="M12 6l4 12h-3l-1-3H10l-1 3H6l4-12zm.8 6.5L12 8.8l-.8 3.7h1.6z" fill="#fff"/></svg> Sarvam AI</span>
+            </div>
+            <div class="proj-row__actions" style="grid-template-columns: 1fr;">
+              <a class="proj-btn proj-btn--github" href="https://github.com/AniketK100/AI-Powered-Video-Captioning-Language-Conversion-Platform" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 03: LinkGuard -->
+        <article class="proj-row" data-reveal data-proj-id="linkguard" data-modal-desc="URL shortening platform built with Spring Boot, React and PostgreSQL — Redis caching cut redirect response time to under 100ms. Includes JWT authentication, privacy-friendly visitor analytics, rate limiting and a QR code generator.">
+          <div class="proj-row__prev">
+            <img src="assets/linkguard.png" alt="LinkGuard — URL Shortening &amp; Analytics Platform" loading="eager" draggable="false" />
+          </div>
+          <div class="proj-row__body">
+            <div class="proj-row__head">
+              <h3 class="proj-row__title">LINKGUARD</h3>
+            </div>
+            <p class="proj-row__desc">Sub-100ms URL shortener with analytics, QR codes &amp; Redis caching.</p>
+            <div class="proj-row__pills">
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M4.5 19.5s3.5 1.5 7.5 1.5 7.5-1.5 7.5-1.5M12 2s-3 3-1 6 3 4 1 7M9 3.5s-2 2-1 4 2 2.5 1 4.5" stroke="#E76F00" stroke-width="1.8" stroke-linecap="round"/></svg> Java</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2zm-1 15.5l-4-2.2v-4.5l4 2.2v4.5zm2 0v-4.5l4-2.2v4.5l-4 2.2z" fill="#6DB33F"/></svg> Spring Boot</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="2" fill="#61DAFB"/></svg> React</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2V13h2v3.5zm0-5.5h-2V7h2v4z" fill="#4169E1"/></svg> PostgreSQL</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M22.7 14.3l-10-5.8c-.4-.2-.9-.2-1.3 0l-10 5.8c-.5.3-.7.8-.7 1.4v5.8c0 .5.3 1 .7 1.3l10 5.8c.2.1.4.2.7.2s.5-.1.7-.2l10-5.8c.5-.3.7-.8.7-1.3v-5.8c0-.6-.3-1.1-.7-1.4zM12 21.6L4 17l8-4.6 8 4.6-8 4.6z" fill="#DC382D"/></svg> Redis</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.888c0 .102.083.185.185.185zm-2.954-5.43h2.118a.185.185 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm0 5.43h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.186v1.888c0 .102.082.185.185.185zm-2.955 0h2.119a.186.186 0 00.185-.185V9.006a.185.185 0 00-.185-.186H8.074a.185.185 0 00-.185.186v1.888c0 .102.083.185.185.185zm0-2.716h2.119a.186.186 0 00.185-.185V6.29a.185.185 0 00-.185-.185H8.074a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm-2.955 2.716h2.119a.186.186 0 00.185-.185V9.006a.186.186 0 00-.185-.186H5.119a.185.185 0 00-.185.186v1.888c0 .102.083.185.185.185zm0-2.716h2.119a.186.186 0 00.185-.185V6.29a.185.185 0 00-.185-.185H5.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm-2.954 2.716h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.165a.185.185 0 00-.185.186v1.888c0 .102.083.185.185.185zm0-2.716h2.119a.186.186 0 00.185-.185V6.29a.185.185 0 00-.185-.185H2.165a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185z" fill="#2496ED"/></svg> Docker</span>
+            </div>
+            <div class="proj-row__actions">
+              <a class="proj-btn proj-btn--github" href="https://github.com/Sahil-Ghorpade/LinkGuard" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub
+              </a>
+              <a class="proj-btn proj-btn--live-red" href="https://link-guard-blond.vercel.app" target="_blank" rel="noopener">
+                <i class="live-dot"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 04: Loopora -->
+        <article class="proj-row" data-reveal data-proj-id="loopora" data-modal-desc="An interview preparation platform serving 500+ questions with written answers and video explanations. Gemini generates personalized answers based on the user's background, responses are cached, and uploads pass file-signature validation.">
+          <div class="proj-row__prev">
+            <img src="assets/loopora.png" alt="Loopora — AI Interview Preparation Platform" loading="eager" draggable="false" />
+          </div>
+          <div class="proj-row__body">
+            <div class="proj-row__head">
+              <h3 class="proj-row__title">LOOPORA</h3>
+            </div>
+            <p class="proj-row__desc">500+ AI interview questions with answers &amp; video explanations.</p>
+            <div class="proj-row__pills">
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#000"/><path d="M17.17 17.51l-4.52-6.55v6.55h-1.63V7.2h1.63l4.52 6.55V7.2h1.63v10.31h-1.63zM7.2 7.2h1.63v9.6H7.2V7.2z" fill="#fff"/></svg> Next.js</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="3" fill="#3178C6"/><path d="M12.5 14.5c.3.5.8.8 1.5.8.7 0 1.1-.3 1.1-.8 0-.5-.4-.7-1.3-1.1l-.5-.2c-1.3-.5-2.1-1.2-2.1-2.6 0-1.5 1.2-2.6 3-2.6 1.3 0 2.2.5 2.7 1.4l-1.3.8c-.3-.5-.7-.7-1.4-.7-.6 0-1 .3-1 .7 0 .4.4.6 1.2 1l.5.2c1.5.6 2.3 1.3 2.3 2.7 0 1.7-1.3 2.7-3.3 2.7-1.7 0-2.8-.8-3.4-1.8l1.3-.8zm-6.5-6.5h7v1.8h-2.5v7h-2v-7h-2.5v-1.8z" fill="#fff"/></svg> TypeScript</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 0c-.3 0-.6.1-.8.4L3.8 8.8c-1.1 1.3-1.8 3-1.8 4.9 0 4.4 3.6 8 8 8s8-3.6 8-8c0-1.9-.7-3.6-1.8-4.9L12.8.4c-.2-.3-.5-.4-.8-.4zm.9 2.5l5.5 6.7c.9 1.1 1.4 2.5 1.4 4 0 3.2-2.5 5.8-5.7 6-.4-.3-.6-.8-.6-1.3V3.1c-.2-.2-.4-.4-.6-.6zm-1.8 0c-.2.2-.4.4-.6.6v14.8c0 .5-.2 1-.6 1.3-3.2-.2-5.7-2.8-5.7-6 0-1.5.5-2.9 1.4-4l5.5-6.7z" fill="#47A248"/></svg> MongoDB</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2C12 7.523 7.523 12 2 12c5.523 0 10 4.477 10 10 0-5.523 4.477-10 10-10-5.523 0-10-4.477-10-10z" fill="url(#gemini-l)"/><defs><linearGradient id="gemini-l" x1="2" y1="2" x2="22" y2="22"><stop stop-color="#1A73E8"/><stop offset="0.5" stop-color="#8E24AA"/><stop offset="1" stop-color="#D93025"/></linearGradient></defs></svg> Gemini API</span>
+              <span class="tech-pill"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 6c-3.3 0-5.5 1.7-6.6 5 1.1-1.7 2.5-2.2 4.1-1.7 1 .3 1.7 1 2.5 1.8C13.3 12.4 15 14 18.6 14c3.3 0 5.5-1.7 6.6-5-1.1 1.7-2.5 2.2-4.1 1.7-1-.3-1.7-1-2.5-1.8C17.3 7.6 15.6 6 12 6zm-6.6 6C2.1 12 0 13.7-1.1 17c1.1-1.7 2.5-2.2 4.1-1.7 1 .3 1.7 1 2.5 1.8C6.8 18.4 8.5 20 12 20c3.3 0 5.5-1.7 6.6-5-1.1 1.7-2.5 2.2-4.1 1.7-1-.3-1.7-1-2.5-1.8-1.3-1.3-3-2.9-6.6-2.9z" fill="#38BDF8"/></svg> Tailwind CSS</span>
+            </div>
+            <div class="proj-row__actions">
+              <a class="proj-btn proj-btn--github" href="https://github.com/AniketK100/Loopora" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub
+              </a>
+              <a class="proj-btn proj-btn--live-red" href="https://loopora.vercel.app/" target="_blank" rel="noopener">
+                <i class="live-dot"></i> Live
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ============ GITHUB ACTIVITY COMPONENT ============ -->
+      <div class="gh-activity" data-reveal>
+        <div class="gh-activity__head">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <a href="https://github.com/AniketK100" target="_blank" rel="noopener" class="gh-activity__link">
+            <h3>Activity — @AniketK100</h3>
+          </a>
+        </div>
+
+        <div class="gh-activity__body">
+          <div class="gh-chart-container">
+            <img class="gh-chart-img" src="https://ghchart.rshah.org/39d353/AniketK100" alt="AniketK100's Live GitHub Contribution Chart" />
+          </div>
+
+          <div class="gh-activity__foot">
+            <span class="gh-count">275 contributions in the last year</span>
+            <a href="https://github.com/AniketK100" target="_blank" rel="noopener" class="gh-foot-link">
+              View live profile on github.com/AniketK100 <svg viewBox="0 0 12 12" width="12" height="12"><path d="M1 11 11 1M4 1h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </a>
+            <div class="gh-legend">
+              <span>Less</span>
+              <span class="sq l-0"></span>
+              <span class="sq l-1"></span>
+              <span class="sq l-2"></span>
+              <span class="sq l-3"></span>
+              <span class="sq l-4"></span>
+              <span>More</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 STACK ============ -->
+    <section class="sec" id="stack">
+      <header class="sec__head">
+        <span class="sec__idx">04</span>
+        <span class="sec__rule" aria-hidden="true"></span>
+        <h2 class="sec__title" data-reveal>Tech Stack</h2>
+      </header>
+
+      <p class="sec__sub" data-reveal>Tools, languages, and frameworks I rely on every day.</p>
+
+      <div class="stack-container">
+        <!-- FULL WIDTH: FULL STACK & LANGUAGES (RESUME SKILLS ONLY - NO PYTHON) -->
+        <div class="stack-box stack-box--full" data-reveal>
+          <h3 class="stack-box__title">FULL STACK &amp; LANGUAGES</h3>
+          <div class="stack-box__pills">
+            <span class="tech-pill tech-pill--html"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M1.5 0h21l-1.91 21.563L11.97 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.926-.804-.188-2.088H6.255l.343 4.322 5.372 1.493 5.372-1.493.725-8.106H8.531z" fill="#E34F26"/></svg> HTML</span>
+            <span class="tech-pill tech-pill--css"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M1.5 0h21l-1.91 21.563L11.97 24l-8.564-2.438L1.5 0zm15.75 4.5H6.75l.23 2.622h9.54l-.23 2.628H9.86l.23 2.622h6.41l-.47 5.25-4.03 1.12-4.03-1.12-.26-2.88H5.11l.46 5.58 6.43 1.79 6.43-1.79 1.05-11.832H17.25z" fill="#1572B6"/></svg> CSS</span>
+            <span class="tech-pill tech-pill--js"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="3" fill="#F7DF1E"/><path d="M13.72 16.97c.4.67.92 1.15 1.75 1.15.78 0 1.28-.38 1.28-1.93v-5.6h2.47v5.67c0 2.87-1.7 4.14-3.77 4.14-2.07 0-3.3-1.14-3.95-2.42l2.22-1.01zm-6.26.04c.54.91 1.42 1.5 2.64 1.5 1.16 0 1.95-.56 1.95-1.37 0-.94-.74-1.28-1.98-1.81l-.68-.29c-1.98-.84-3.3-1.9-3.3-4.14 0-2.31 1.77-4.01 4.43-4.01 2.05 0 3.39.77 4.2 2.2l-2.09 1.34c-.45-.81-1.07-1.15-2.06-1.15-.96 0-1.66.57-1.66 1.35 0 .86.63 1.2 1.83 1.71l.68.29c2.32.99 3.51 2.03 3.51 4.26 0 2.65-2.07 4.17-4.96 4.17-2.6 0-4.22-1.24-4.97-2.73l2.25-1.37z" fill="#000"/></svg> JavaScript</span>
+            <span class="tech-pill tech-pill--ts"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="3" fill="#3178C6"/><path d="M12.5 14.5c.3.5.8.8 1.5.8.7 0 1.1-.3 1.1-.8 0-.5-.4-.7-1.3-1.1l-.5-.2c-1.3-.5-2.1-1.2-2.1-2.6 0-1.5 1.2-2.6 3-2.6 1.3 0 2.2.5 2.7 1.4l-1.3.8c-.3-.5-.7-.7-1.4-.7-.6 0-1 .3-1 .7 0 .4.4.6 1.2 1l.5.2c1.5.6 2.3 1.3 2.3 2.7 0 1.7-1.3 2.7-3.3 2.7-1.7 0-2.8-.8-3.4-1.8l1.3-.8zm-6.5-6.5h7v1.8h-2.5v7h-2v-7h-2.5v-1.8z" fill="#fff"/></svg> TypeScript</span>
+            <span class="tech-pill tech-pill--c"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#00599C"/><path d="M12 6l-6 12h12L12 6z" fill="#fff"/></svg> C</span>
+            <span class="tech-pill tech-pill--java"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M4.5 19.5s3.5 1.5 7.5 1.5 7.5-1.5 7.5-1.5M12 2s-3 3-1 6 3 4 1 7M9 3.5s-2 2-1 4 2 2.5 1 4.5" stroke="#E76F00" stroke-width="1.8" stroke-linecap="round"/></svg> Java</span>
+            <span class="tech-pill tech-pill--react"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="#61DAFB" stroke-width="1.5" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="2" fill="#61DAFB"/></svg> React</span>
+            <span class="tech-pill tech-pill--tailwind"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 6c-3.3 0-5.5 1.7-6.6 5 1.1-1.7 2.5-2.2 4.1-1.7 1 .3 1.7 1 2.5 1.8C13.3 12.4 15 14 18.6 14c3.3 0 5.5-1.7 6.6-5-1.1 1.7-2.5 2.2-4.1 1.7-1-.3-1.7-1-2.5-1.8C17.3 7.6 15.6 6 12 6zm-6.6 6C2.1 12 0 13.7-1.1 17c1.1-1.7 2.5-2.2 4.1-1.7 1 .3 1.7 1 2.5 1.8C6.8 18.4 8.5 20 12 20c3.3 0 5.5-1.7 6.6-5-1.1 1.7-2.5 2.2-4.1 1.7-1-.3-1.7-1-2.5-1.8-1.3-1.3-3-2.9-6.6-2.9z" fill="#38BDF8"/></svg> Tailwind CSS</span>
+            <span class="tech-pill tech-pill--next"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#000"/><path d="M17.17 17.51l-4.52-6.55v6.55h-1.63V7.2h1.63l4.52 6.55V7.2h1.63v10.31h-1.63zM7.2 7.2h1.63v9.6H7.2V7.2z" fill="#fff"/></svg> Next.js</span>
+            <span class="tech-pill tech-pill--node"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7.7v11.5L12 25l10-5.8V7.7L12 2zm-1 15.8h-2v-6.5h2v6.5zm-1-7.8c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2zm6 7.8h-2v-3.5c0-.8-.6-1.5-1.5-1.5S11 13.7 11 14.5v3.5H9v-6.5h2v.9c.5-.6 1.3-1 2.2-1 1.8 0 3.3 1.5 3.3 3.3v3.3z" fill="#5FA04E"/></svg> Node.js</span>
+            <span class="tech-pill tech-pill--express"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#259D9A"/><path d="M7 8l4 8M15 8l-4 8M14 13h5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> Express.js</span>
+            <span class="tech-pill tech-pill--rest"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#006699"/><path d="M6 12h12M12 6v12" stroke="#fff" stroke-width="2"/></svg> REST APIs</span>
+            <span class="tech-pill tech-pill--socket"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="1.5"/><path d="M13 6l-5 7h4l-1 5 5-7h-4l1-5z" fill="#fff"/></svg> Socket.IO</span>
+            <span class="tech-pill tech-pill--webrtc"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="12" r="4" fill="#336699"/><circle cx="17" cy="12" r="4" fill="#FF9900"/><path d="M10 10l4 4M14 10l-4 4" stroke="#fff" stroke-width="1.5"/></svg> WebRTC</span>
+            <span class="tech-pill tech-pill--mongo"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 0c-.3 0-.6.1-.8.4L3.8 8.8c-1.1 1.3-1.8 3-1.8 4.9 0 4.4 3.6 8 8 8s8-3.6 8-8c0-1.9-.7-3.6-1.8-4.9L12.8.4c-.2-.3-.5-.4-.8-.4zm.9 2.5l5.5 6.7c.9 1.1 1.4 2.5 1.4 4 0 3.2-2.5 5.8-5.7 6-.4-.3-.6-.8-.6-1.3V3.1c-.2-.2-.4-.4-.6-.6zm-1.8 0c-.2.2-.4.4-.6.6v14.8c0 .5-.2 1-.6 1.3-3.2-.2-5.7-2.8-5.7-6 0-1.5.5-2.9 1.4-4l5.5-6.7z" fill="#47A248"/></svg> MongoDB</span>
+            <span class="tech-pill tech-pill--mysql"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="#00758F"/></svg> MySQL</span>
+            <span class="tech-pill tech-pill--postgres"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2V13h2v3.5zm0-5.5h-2V7h2v4z" fill="#4169E1"/></svg> PostgreSQL</span>
+            <span class="tech-pill tech-pill--redis"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M22.7 14.3l-10-5.8c-.4-.2-.9-.2-1.3 0l-10 5.8c-.5.3-.7.8-.7 1.4v5.8c0 .5.3 1 .7 1.3l10 5.8c.2.1.4.2.7.2s.5-.1.7-.2l10-5.8c.5-.3.7-.8.7-1.3v-5.8c0-.6-.3-1.1-.7-1.4zM12 21.6L4 17l8-4.6 8 4.6-8 4.6z" fill="#DC382D"/></svg> Redis</span>
+          </div>
+        </div>
+
+        <!-- TWO COLUMN ROW: TOOLS & AI APIS -->
+        <div class="stack-row">
+          <div class="stack-box stack-box--tools" data-reveal>
+            <h3 class="stack-box__title">TOOLS &amp; INFRASTRUCTURE</h3>
+            <div class="stack-box__pills">
+              <span class="tech-pill tech-pill--git"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.216 1.38-.07 1.9.45.52.52.665 1.256.45 1.9l2.6 2.6c.644-.214 1.38-.07 1.9.45.753.753.753 1.975 0 2.727-.753.754-1.974.754-2.728 0-.543-.544-.678-1.32-.413-1.986l-2.434-2.435-.002.002v6.236c.214.132.404.306.55.518.753.753.753 1.974 0 2.728-.754.753-1.975.753-2.728 0-.753-.754-.753-1.975 0-2.728.18-.18.39-.313.616-.403V9.593c-.226-.09-.437-.223-.616-.403-.544-.543-.678-1.32-.415-1.987L7.697 4.767l-7.24 7.24c-.604.604-.604 1.582 0 2.187l10.48 10.48c.604.604 1.582.604 2.186 0l10.423-10.424c.604-.603.604-1.58 0-2.185z" fill="#F05032"/></svg> Git</span>
+              <span class="tech-pill tech-pill--gh"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" fill="#fff"/></svg> GitHub</span>
+              <span class="tech-pill tech-pill--docker"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.888c0 .102.083.185.185.185zm-2.954-5.43h2.118a.185.185 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.186.185.186zm0 5.43h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.186v1.888c0 .102.082.185.185.185zm-2.955 0h2.119a.186.186 0 00.185-.185V9.006a.185.185 0 00-.185-.186H8.074a.185.185 0 00-.185.186v1.888c0 .102.083.185.185.185zm0-2.716h2.119a.186.186 0 00.185-.185V6.29a.185.185 0 00-.185-.185H8.074a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm-2.955 2.716h2.119a.186.186 0 00.185-.185V9.006a.186.186 0 00-.185-.186H5.119a.185.185 0 00-.185.186v1.888c0 .102.083.185.185.185zm0-2.716h2.119a.186.186 0 00.185-.185V6.29a.185.185 0 00-.185-.185H5.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185zm-2.954 2.716h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186H2.165a.185.185 0 00-.185.186v1.888c0 .102.083.185.185.185zm0-2.716h2.119a.186.186 0 00.185-.185V6.29a.185.185 0 00-.185-.185H2.165a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185z" fill="#2496ED"/></svg> Docker</span>
+              <span class="tech-pill tech-pill--actions"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#2088FF"/><path d="M6 12l4 4 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg> GitHub Actions</span>
+              <span class="tech-pill tech-pill--ffmpeg"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#007808"/><path d="M6 7h12M6 12h8M6 17h12" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> FFmpeg</span>
+            </div>
+          </div>
+
+          <div class="stack-box stack-box--ai" data-reveal>
+            <h3 class="stack-box__title">AI TOOLS</h3>
+            <div class="stack-box__pills stack-box__pills--col">
+              <span class="tech-pill tech-pill--antigravity"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" fill="url(#antigravity-st)"/><defs><linearGradient id="antigravity-st" x1="2" y1="2" x2="22" y2="22"><stop stop-color="#FF4D00"/><stop offset="1" stop-color="#FF9900"/></linearGradient></defs></svg> Antigravity</span>
+              <span class="tech-pill tech-pill--claude"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#D97757"/><path d="M12 7v10M7 12h10M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> Claude Code</span>
+              <span class="tech-pill tech-pill--codex"><svg class="tech-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#10A37F"/><path d="M8 9l-3 3 3 3M16 9l3 3-3 3M13 7l-2 10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg> Codex</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="certs">
+        <h3 class="certs__title" data-reveal>Certifications &amp; Training</h3>
+        <div class="certs__row" data-reveal>
+          <span class="certs__date">SEP—OCT 2025</span>
+          <p>OCI 2025 Certified AI Foundations Associate</p>
+          <span class="certs__org">Oracle Cloud Infrastructure</span>
+        </div>
+        <div class="certs__row" data-reveal>
+          <span class="certs__date">JUL—SEP 2024</span>
+          <p>AI/ML Virtual Internship</p>
+          <span class="certs__org">EduSkills · Google for Developers · AICTE</span>
+        </div>
+        <div class="certs__row" data-reveal>
+          <span class="certs__date">JUN—SEP 2025</span>
+          <p>AI/ML &amp; Soft Skills Training</p>
+          <span class="certs__org">TNS India Foundation</span>
+        </div>
+        <div class="certs__row" data-reveal>
+          <span class="certs__date">DEC 2023—FEB 2024</span>
+          <p>Web Development Training</p>
+          <span class="certs__org">Internshala — HTML, CSS, Bootstrap, PHP, JavaScript, React</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 CONTACT ============ -->
+    <section class="sec contact" id="contact">
+      <header class="sec__head">
+        <span class="sec__idx">05</span>
+        <span class="sec__rule" aria-hidden="true"></span>
+        <h2 class="sec__title" data-reveal>Contact</h2>
+      </header>
+
+      <h3 class="contact__title" aria-label="Lets build something real">
+        <span class="contact__line" data-hero-line>LET'S BUILD SOMETHING REAL<span class="hero__dot">.</span></span>
+      </h3>
+
+      <div class="contact__rows">
+        <a class="contact__row" href="mailto:aniketkakad8282@gmail.com" data-cursor="open" data-mag>
+          <span class="contact__label">EMAIL</span>
+          <span class="contact__value">aniketkakad8282@gmail.com</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 11 11 1M4 1h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        <a class="contact__row" href="tel:+919224648203" data-cursor="open" data-mag>
+          <span class="contact__label">PHONE</span>
+          <span class="contact__value">+91 92246 48203</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 11 11 1M4 1h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        <a class="contact__row" href="https://github.com/AniketK100" target="_blank" rel="noopener" data-cursor="open" data-mag>
+          <span class="contact__label">GITHUB</span>
+          <span class="contact__value">github.com/AniketK100</span>
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 11 11 1M4 1h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="marquee footer__marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>ANIKET KAKAD <i>/</i> PORTFOLIO 2026 <i>/</i> MUMBAI, INDIA <i>/</i></span>
+        <span>ANIKET KAKAD <i>/</i> PORTFOLIO 2026 <i>/</i> MUMBAI, INDIA <i>/</i></span>
+      </div>
+    </div>
+    <div class="footer__bar">
+      <span>© 2026 ANIKET KAKAD</span>
+      <a class="footer__top" href="#top" aria-label="Back to top">BACK TO TOP <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1 11 11 1M4 1h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
+    </div>
+  </footer>
+
+  <!-- ============ CURSOR ============ -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <span class="cursor__lbl">OPEN</span>
+  </div>
+
+  <!-- ============ GLASSMORPHIC PROJECT MODAL ============ -->
+  <div class="proj-modal" id="projModal" aria-hidden="true">
+    <div class="proj-modal__overlay" id="projModalOverlay"></div>
+    <div class="proj-modal__content">
+      <button class="proj-modal__close" id="projModalClose" aria-label="Close modal">&times;</button>
+      <div class="proj-modal__img-box">
+        <img id="modalImg" src="" alt="Project Preview" draggable="false" />
+      </div>
+      <div class="proj-modal__info">
+        <span class="proj-modal__badge" id="modalBadge"></span>
+        <h2 class="proj-modal__title" id="modalTitle"></h2>
+        <p class="proj-modal__desc" id="modalDesc"></p>
+        <div class="proj-modal__pills" id="modalPills"></div>
+        <div class="proj-modal__actions" id="modalActions"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+  <script src="js/portrait-data.js" defer></script>
+  <script src="js/ascii.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
