@@ -220,6 +220,11 @@ svg { display: block; }
   font-weight: 700;
   font-size: 1.1rem;
   letter-spacing: .04em;
+  line-height: 1;
+}
+.head__logo em {
+  font-style: normal;
+  color: var(--accent);
 }
 .head__logo-yr {
   font-family: var(--font-mono);
@@ -261,7 +266,7 @@ svg { display: block; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid var(--line-2);
   padding: 0.4rem 0.85rem;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.04);
@@ -348,11 +353,13 @@ svg { display: block; }
   flex-direction: column;
   justify-content: space-between;
   padding: 7rem var(--pad-inline) 2rem;
+  overflow-y: auto;
   visibility: hidden;
   opacity: 0;
   transition: opacity .4s var(--ease), visibility .4s;
 }
 body.menu-open .menu { visibility: visible; opacity: 1; }
+body.menu-open { overflow: hidden; }
 
 .menu__nav { display: flex; flex-direction: column; gap: .4rem; }
 .menu__link {
@@ -361,7 +368,7 @@ body.menu-open .menu { visibility: visible; opacity: 1; }
   gap: 1rem;
   font-family: var(--font-disp);
   font-weight: 500;
-  font-size: clamp(2.2rem, 11vw, 4rem);
+  font-size: clamp(1.25rem, 7.6vw, 4rem);
   text-transform: uppercase;
   line-height: 1.1;
   padding: .35rem 0;
@@ -769,6 +776,7 @@ a, button, input, textarea, select, [role="button"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
@@ -777,6 +785,10 @@ a, button, input, textarea, select, [role="button"] {
   font-size: 0.78rem;
   color: var(--text-2);
   transition: all 0.25s ease;
+}
+.profile-card__email span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .profile-card__email:hover {
   color: var(--accent);
@@ -1401,10 +1413,9 @@ a, button, input, textarea, select, [role="button"] {
   text-transform: uppercase;
   line-height: 1.08;
   letter-spacing: -.02em;
-  white-space: nowrap;
   margin: 0 0 clamp(3rem, 8vh, 6rem);
 }
-.contact__line { overflow: clip; display: inline-block; }
+.contact__line { display: block; }
 .contact__title .hero__dot { color: var(--accent); }
 
 .contact__rows { display: flex; flex-direction: column; }
@@ -1473,6 +1484,13 @@ a, button, input, textarea, select, [role="button"] {
 }
 
 /* ---------- RESPONSIVE ---------- */
+@media (min-width: 1600px) {
+  .profile {
+    max-width: 1320px;
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 1024px) {
   .profile { grid-template-columns: 1fr; gap: 3rem; }
   .work__row { grid-template-columns: minmax(200px, 38%) 1fr; gap: 1.8rem; }
@@ -1491,11 +1509,24 @@ a, button, input, textarea, select, [role="button"] {
   .sec__title { margin-left: 0; }
   .sec__sub { margin-top: 0; }
 
-  .hero { min-height: 100svh; }
+  .hero { min-height: 100svh; padding-top: calc(6.5rem + env(safe-area-inset-top)); }
   .hero__meta { flex-wrap: wrap; row-gap: .4rem; }
   .hero__bottom { grid-template-columns: 1fr; align-items: start; }
-  .hero__title-wrap { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+  .hero__title-wrap { flex-direction: column; align-items: flex-start; gap: 1.4rem; order: 1; flex: none; }
   .hero__scroll { display: none; }
+  .hero__bottom { order: 2; }
+  .hero__portrait-wrap {
+    order: 3;
+    position: relative;
+    top: auto; right: auto; bottom: auto;
+    width: min(100%, 480px);
+    max-width: none;
+    height: auto;
+    aspect-ratio: 90 / 84;
+    align-self: flex-end;
+    margin-top: 1.25rem;
+  }
+  .hero__marquee { order: 4; }
 
   .work__row { grid-template-columns: 1fr; }
   .work__prev { order: 2; }
@@ -1532,6 +1563,14 @@ a, button, input, textarea, select, [role="button"] {
   }
   .stack__col:first-child { border-top: 0; }
   .stack__col--ai { border-top: 1px solid var(--line); }
+
+  .menu__link { gap: .6rem; }
+  .menu__link span { font-size: .72rem; }
+  .proj-modal { padding: .6rem; }
+  .proj-modal__content { padding: 1.4rem; }
+  .proj-modal__close { top: .9rem; right: .9rem; }
+  .gh-activity { padding: 1.25rem; }
+  .profile-card { padding: 1.3rem 1.2rem; }
 }
 
 /* ---------- REDUCED MOTION ---------- */

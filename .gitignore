@@ -1,26 +1,69 @@
-# Logs
+# ─────────────────────────────────────────────
+#  Logs
+# ─────────────────────────────────────────────
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Runtime data & environment
+# ─────────────────────────────────────────────
+#  Environment & Secrets
+# ─────────────────────────────────────────────
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.*
+*.env.production
 
-# Dependency & build directories
+# ─────────────────────────────────────────────
+#  Dependency & Build Output
+# ─────────────────────────────────────────────
 node_modules/
 dist/
 build/
+out/
+.next/
+.vite/
+coverage/
 .cache/
+*.tsbuildinfo
 
-# OS metadata & Editor files
+# ─────────────────────────────────────────────
+#  Python
+# ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.python-version
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+
+# ─────────────────────────────────────────────
+#  OS Metadata & Editor Files
+# ─────────────────────────────────────────────
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 Desktop.ini
+$RECYCLE.BIN/
 .idea/
 .vscode/*
 !.vscode/settings.json
@@ -32,13 +75,15 @@ Desktop.ini
 *.njsproj
 *.sln
 *.swp
+*~
+.history/
 
-# Temporary & backup files
+# ─────────────────────────────────────────────
+#  Temporary & Backup Files
+# ─────────────────────────────────────────────
 *.bak
 *.tmp
 *.temp
+*.orig
+*.rej
 scratch_*.txt
-
-# Python
-__pycache__/
-*.pyc
