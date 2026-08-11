@@ -364,14 +364,50 @@
     });
   }
 
+  /* ---- live github activity fetcher ---- */
+  function fetchGitHubActivity() {
+    var countEl = document.getElementById('ghCount');
+    var chartImg = document.getElementById('ghChartImg');
+
+    if (chartImg) {
+      chartImg.src = 'https://ghchart.rshah.org/39d353/AniketK100?t=' + Date.now();
+    }
+
+    if (countEl) {
+      fetch('https://api.github.com/users/AniketK100')
+        .then(function (res) { return res.json(); })
+        .then(function (user) {
+          fetch('https://api.github.com/users/AniketK100/events')
+            .then(function (r) { return r.json(); })
+            .then(function (events) {
+              if (Array.isArray(events) && events.length > 0) {
+                var last = events[0];
+                var repo = (last.repo && last.repo.name) ? last.repo.name : 'AniketK100/Aniket';
+                var dt = last.created_at ? new Date(last.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'recently';
+                countEl.textContent = 'Live Activity: ' + (user.public_repos || 4) + ' public repos • Latest push to ' + repo + ' (' + dt + ')';
+              } else {
+                countEl.textContent = 'Live GitHub Profile Active — @AniketK100';
+              }
+            })
+            .catch(function () {
+              countEl.textContent = 'Live GitHub Profile Active — @AniketK100';
+            });
+        })
+        .catch(function () {
+          countEl.textContent = 'Live GitHub Profile Active — @AniketK100';
+        });
+    }
+  }
+
   /* ---- boot ---- */
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { boot(); initModal(); });
+    document.addEventListener('DOMContentLoaded', function() { boot(); initModal(); fetchGitHubActivity(); });
   } else {
     boot();
     initModal();
+    fetchGitHubActivity();
   }
-  cursor();
+  /* cursor(); -- disabled, using standard native browser cursor */
   clock();
 
   /* ---- content protection: no drag, no right-click ---- */

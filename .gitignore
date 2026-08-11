@@ -37,3 +37,8 @@ Desktop.ini
 *.bak
 *.tmp
 *.temp
+scratch_*.txt
+
+# Python
+__pycache__/
+*.pyc

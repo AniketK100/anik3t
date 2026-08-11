@@ -1,0 +1,35 @@
+# Aniket Kakad
+
+> Full-Stack Developer based in Mumbai, India. Specializes in building real-time full-stack web applications, AI integrations, and high-performance backend systems.
+
+## About & Profile
+
+- **Name**: Aniket Kakad
+- **Role**: Full-Stack Developer
+- **Location**: Mumbai, Maharashtra, India
+- **Experience**: Software Development Intern @ MSRDC (Maharashtra State Road Development Corporation)
+- **GitHub**: https://github.com/AniketK100
+- **LinkedIn**: https://linkedin.com/in/aniket-kakad
+- **Email**: aniketkakad100@gmail.com
+
+## Featured Projects
+
+- [Zenius AI](https://github.com/Mediwateyash/Live-Meet): Real-time e-learning platform built at MSRDC featuring WebRTC live video classrooms, Gemini AI quiz generator, automated certificates, and role-based dashboards. Built with React, Tailwind CSS, Node.js, Express.js, MongoDB, Socket.IO, WebRTC, and Gemini API.
+- [CaptionFlow](https://github.com/AniketK100/AI-Powered-Video-Captioning-Language-Conversion-Platform): Multilingual AI video captioning platform with styled subtitle export. Transcribes audio via Groq Whisper & Sarvam AI with provider fallback, word-level LCS timestamp synchronization, and FFmpeg rendering. Built with React, Node.js, Express.js, FFmpeg, Groq Whisper, and Sarvam AI.
+- [LinkGuard](https://github.com/Sahil-Ghorpade/LinkGuard): URL shortener under 100ms with visitor analytics, QR code generation, JWT authentication, rate limiting, and Redis caching. Built with Java, Spring Boot, React, PostgreSQL, Redis, and Docker.
+- [Loopora](https://github.com/AniketK100/Loopora): AI-powered interview preparation platform featuring 500+ questions, written answers, video explanations, and Gemini API personalization. Built with Next.js, TypeScript, MongoDB, Gemini API, and Tailwind CSS.
+
+## Technical Skills
+
+- **Languages**: JavaScript (ES6+), TypeScript, Java, C, HTML5, CSS3
+- **Frontend**: React, Next.js, Tailwind CSS
+- **Backend & Real-Time**: Node.js, Express.js, Spring Boot, WebRTC, Socket.IO
+- **Databases & Caching**: MongoDB, PostgreSQL, Redis, MySQL
+- **Tools & AI**: Git, GitHub, Docker, GitHub Actions, FFmpeg, Gemini API, Groq API, Antigravity, Claude Code, Codex
+
+## Certifications
+
+- OCI 2025 Certified AI Foundations Associate — Oracle Cloud Infrastructure (2025)
+- AI/ML & Soft Skills Training — TNS India Foundation (2025)
+- AI/ML Virtual Internship — EduSkills / Google for Developers / AICTE (2024)
+- Web Development Training — Internshala (2024)

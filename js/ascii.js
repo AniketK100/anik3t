@@ -84,16 +84,18 @@
     bgCtx.clearRect(0, 0, w, h);
 
     var fontSize = 12;
-    var charW = 10; // Approx width per character at 12px Space Mono
     var cellH = 16;
-
-    // Dynamically calculate columns to guarantee full coverage past the right edge
-    var bgCols = Math.ceil(w / charW) + 10;
-    var bgRows = Math.ceil(h / cellH);
 
     bgCtx.font = fontSize + 'px "Space Mono", monospace';
     bgCtx.textBaseline = 'top';
     bgCtx.fillStyle = 'rgba(255, 255, 255, 0.22)';
+
+    var measuredW = bgCtx.measureText('M').width || 7.2;
+    var charW = Math.max(measuredW, 6);
+
+    // Dynamically calculate columns to guarantee 100% full coverage past the far right edge
+    var bgCols = Math.ceil(w / charW) + 25;
+    var bgRows = Math.ceil(h / cellH);
 
     for (var r = 0; r < bgRows; r++) {
       var y = r * cellH;
@@ -132,17 +134,17 @@
 
     pCtx.font = fontSize + 'px "Space Mono", monospace';
     pCtx.textAlign = 'center';
-    pCtx.textBaseline = 'middle';
+    pCtx.textBaseline = 'top';
     pCtx.fillStyle = 'rgba(245, 248, 255, 0.96)';
 
     for (var r = 0; r < rows; r++) {
       var rowData = data[r];
-      var y = (r + 0.5) * cellH;
+      var y = r * cellH;
 
       for (var c = 0; c < cols; c++) {
         var lum = rowData[c];
 
-        if (lum < 0.015) continue;
+        if (lum <= 0) continue;
 
         var w1 = Math.sin(c * 0.12 + time * 2.0) * 0.03;
         var w2 = Math.cos(r * 0.14 + time * 1.5) * 0.02;
