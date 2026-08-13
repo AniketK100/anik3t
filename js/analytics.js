@@ -19,10 +19,15 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    // 1. REGISTER GLOBAL SUPER PROPERTIES
+    // 1. REGISTER GLOBAL SUPER PROPERTIES & ENSURE SESSION RECORDING STARTS
     try {
-      if (window.posthog && typeof window.posthog.register === 'function') {
-        window.posthog.register({ site: 'portfolio' });
+      if (window.posthog) {
+        if (typeof window.posthog.register === 'function') {
+          window.posthog.register({ site: 'portfolio' });
+        }
+        if (typeof window.posthog.startSessionRecording === 'function') {
+          window.posthog.startSessionRecording();
+        }
       }
     } catch (e) {}
 

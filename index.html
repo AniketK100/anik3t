@@ -95,15 +95,23 @@
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}var w=e;for("undefined"!=typeof a?w=e[a]=[]:a="posthog",w.people=w.people||[],w.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},w.people.toString=function(){return w.toString(1)+".people (stub)"},p="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),r=0;r<p.length;r++)g(w,p[r]);e._i.push([i,s,a])},e.__SV=1.0)}(document,window.posthog||[]);
     posthog.init('phc_ng2VRfFtNoq2RLh6CNXLUxoQwF4TpySBtBnKY8xaME5F', {
       api_host: 'https://us.i.posthog.com',
-      person_profiles: 'identified_only',
+      ui_host: 'https://us.posthog.com',
+      person_profiles: 'always',
       capture_pageview: true,
       capture_pageleave: true,
+      disable_session_recording: false,
       defaults: {
         site: 'portfolio'
       },
       session_recording: {
         maskAllInputs: true,
         maskTextSelector: '.sensitive-text'
+      },
+      loaded: function(ph) {
+        ph.register({ site: 'portfolio' });
+        if (typeof ph.startSessionRecording === 'function') {
+          ph.startSessionRecording();
+        }
       }
     });
   </script>
@@ -140,7 +148,7 @@
     </nav>
 
     <div class="head__right">
-      <a href="Aniket_Kakad_Resume.pdf" download target="_blank" rel="noopener" class="btn btn--head-resume">RESUME</a>
+      <a href="Aniket_Kakad_Resume.pdf" target="_blank" rel="noopener" class="btn btn--head-resume">RESUME</a>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
