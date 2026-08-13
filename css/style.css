@@ -635,11 +635,14 @@ a, button, input, textarea, select, [role="button"] {
 /* ---------- PROFILE REDESIGN ---------- */
 .profile {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(2.5rem, 5vw, 5rem);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
   align-items: stretch;
+  width: 100%;
+  max-width: 100%;
 }
 .profile__main {
+  grid-column: 1;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -687,6 +690,7 @@ a, button, input, textarea, select, [role="button"] {
 }
 
 .profile__aside {
+  grid-column: 2;
   display: flex;
   flex-direction: column;
 }
@@ -1486,13 +1490,14 @@ a, button, input, textarea, select, [role="button"] {
 /* ---------- RESPONSIVE ---------- */
 @media (min-width: 1600px) {
   .profile {
-    max-width: 1320px;
-    margin-inline: auto;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
 @media (max-width: 1024px) {
   .profile { grid-template-columns: 1fr; gap: 3rem; }
+  .profile__main, .profile__aside { grid-column: auto; }
   .work__row { grid-template-columns: minmax(200px, 38%) 1fr; gap: 1.8rem; }
 }
 

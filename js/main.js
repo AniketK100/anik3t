@@ -132,12 +132,11 @@
         }
       });
     }
-    gsap.set('.pre__kick, .pre__skill, .pre__count', { opacity: 0, y: 8 });
-    tl.fromTo('#preLine', { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'power2.inOut' })
-      .to('.pre__kick', { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }, 0.08)
-      .to('.pre__name', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.12)
-      .to('.pre__status > *', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out', stagger: 0.06 }, '-=0.15')
-      .to('.pre__name', { opacity: 0.18, duration: 0.35, ease: 'power1.out' }, '-=0.1');
+    gsap.set('.pre__kick, .pre__skill, .pre__count', { opacity: 1, y: 0 });
+    tl.fromTo('#preLine', { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'power2.inOut' }, 0)
+      .to('.pre__kick', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0)
+      .to('.pre__name', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0)
+      .to('.pre__status > *', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0);
 
     function entrance() {
       gsap.fromTo('.hero__line .ch i',

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aniketkakad.dev/sitemap.xml
+Sitemap: https://anik3t.vercel.app/sitemap.xml
