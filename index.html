@@ -99,7 +99,7 @@
       api_host: '/ingest',
       ui_host: 'https://us.posthog.com',
       person_profiles: 'always',
-      capture_pageview: false,
+      capture_pageview: true,
       capture_pageleave: true,
       disable_session_recording: false,
       session_recording: {
@@ -108,7 +108,6 @@
       },
       loaded: function(ph) {
         ph.register({ site: 'portfolio' });
-        ph.capture('$pageview', { site: 'portfolio' });
         if (typeof ph.startSessionRecording === 'function') {
           ph.startSessionRecording();
         }
