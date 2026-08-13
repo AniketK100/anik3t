@@ -132,9 +132,8 @@
         }
       });
     }
-    gsap.set('.pre__kick, .pre__skill, .pre__count', { opacity: 1, y: 0 });
+    gsap.set('.pre__name, .pre__skill, .pre__count', { opacity: 1, y: 0 });
     tl.fromTo('#preLine', { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'power2.inOut' }, 0)
-      .to('.pre__kick', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0)
       .to('.pre__name', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0)
       .to('.pre__status > *', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0);
 
@@ -176,7 +175,7 @@
         ease: 'none',
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
       });
-      gsap.to('.hero__meta', {
+      gsap.to('.hero__bottom', {
         yPercent: -60,
         opacity: 0,
         ease: 'none',
