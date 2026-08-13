@@ -29,6 +29,10 @@
           window.posthog.startSessionRecording();
         }
       }
+      trackEvent('portfolio_pageview', {
+        page_url: window.location.href,
+        page_title: document.title
+      });
     } catch (e) {}
 
     // 2. NAVIGATION TRACKING (Desktop & Mobile)
