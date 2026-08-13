@@ -88,20 +88,18 @@
       [data-reveal], [data-hero-fade] { opacity: 1 !important; }
     </style>
   </noscript>
-  <!-- PostHog Analytics Initialization -->
-  <link rel="preconnect" href="https://us.i.posthog.com" crossorigin>
-  <link rel="preconnect" href="https://us-assets.i.posthog.com" crossorigin>
+  <!-- PostHog Analytics (first-party proxy via Vercel rewrites) -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}var w=e;for("undefined"!=typeof a?w=e[a]=[]:a="posthog",w.people=w.people||[],w.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},w.people.toString=function(){return w.toString(1)+".people (stub)"},p="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),r=0;r<p.length;r++)g(w,p[r]);e._i.push([i,s,a])},e.__SV=1.0,
-    (n=t.createElement("script")).type="text/javascript",n.crossOrigin="anonymous",n.async=!0,n.src="https://us-assets.i.posthog.com/static/array.js",
+    (n=t.createElement("script")).type="text/javascript",n.crossOrigin="anonymous",n.async=!0,n.src="/ingest/static/array.js",
     (r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(n,r))
     }(document,window.posthog||[]);
 
     posthog.init('phc_ng2VRfFtNoq2RLh6CNXLUxoQwF4TpySBtBnKY8xaME5F', {
-      api_host: 'https://us.i.posthog.com',
+      api_host: '/ingest',
       ui_host: 'https://us.posthog.com',
       person_profiles: 'always',
-      capture_pageview: true,
+      capture_pageview: false,
       capture_pageleave: true,
       disable_session_recording: false,
       session_recording: {

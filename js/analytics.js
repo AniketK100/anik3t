@@ -19,7 +19,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    // 1. REGISTER GLOBAL SUPER PROPERTIES & ENSURE SESSION RECORDING STARTS
+    // 1. REGISTER GLOBAL SUPER PROPERTIES & ENSURE SESSION RECORDING
     try {
       if (window.posthog) {
         if (typeof window.posthog.register === 'function') {
@@ -29,10 +29,6 @@
           window.posthog.startSessionRecording();
         }
       }
-      trackEvent('portfolio_pageview', {
-        page_url: window.location.href,
-        page_title: document.title
-      });
     } catch (e) {}
 
     // 2. NAVIGATION TRACKING (Desktop & Mobile)
