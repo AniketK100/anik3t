@@ -46,11 +46,11 @@
     });
 
     // 3. RESUME TRACKING
-    document.querySelectorAll('a[href*="Resume.pdf"], .btn--head-resume').forEach(function (btn) {
+    document.querySelectorAll('a[href*="Resume"], .btn--head-resume').forEach(function (btn) {
       btn.addEventListener('click', function () {
         trackEvent('resume_clicked', {
           button_name: 'Resume',
-          destination: btn.getAttribute('href') || 'Resume.pdf'
+          destination: btn.getAttribute('href') || 'Aniket_Kakad_Resume_.pdf'
         });
       });
     });

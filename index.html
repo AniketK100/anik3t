@@ -11,9 +11,9 @@
   <meta name="theme-color" content="#0E0E10">
 
   <!-- Security & Privacy Meta Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https: https://ghchart.rshah.org; connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com https://ghchart.rshah.org; worker-src 'self' blob:; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://us-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https: https://ghchart.rshah.org; connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com https://ghchart.rshah.org https://cdn.jsdelivr.net; worker-src 'self' blob:; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
@@ -88,15 +88,17 @@
       [data-reveal], [data-hero-fade] { opacity: 1 !important; }
     </style>
   </noscript>
-  <!-- PostHog Analytics (first-party proxy via Vercel rewrites) -->
+  <!-- PostHog Analytics -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}var w=e;for("undefined"!=typeof a?w=e[a]=[]:a="posthog",w.people=w.people||[],w.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},w.people.toString=function(){return w.toString(1)+".people (stub)"},p="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),r=0;r<p.length;r++)g(w,p[r]);e._i.push([i,s,a])},e.__SV=1.0,
-    (n=t.createElement("script")).type="text/javascript",n.crossOrigin="anonymous",n.async=!0,n.src="/ingest/static/array.js",
+    (n=t.createElement("script")).type="text/javascript",n.crossOrigin="anonymous",n.async=!0,
+    n.src=(window.location.protocol.indexOf('http')===0&&window.location.hostname.indexOf('vercel.app')!==-1)?"/ingest/static/array.js":"https://us-assets.i.posthog.com/static/array.js",
     (r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(n,r))
     }(document,window.posthog||[]);
 
+    var isVercel = window.location.protocol.indexOf('http') === 0 && window.location.hostname.indexOf('vercel.app') !== -1;
     posthog.init('phc_ng2VRfFtNoq2RLh6CNXLUxoQwF4TpySBtBnKY8xaME5F', {
-      api_host: '/ingest',
+      api_host: isVercel ? '/ingest' : 'https://us.i.posthog.com',
       ui_host: 'https://us.posthog.com',
       person_profiles: 'always',
       capture_pageview: true,
@@ -147,7 +149,7 @@
     </nav>
 
     <div class="head__right">
-      <a href="Aniket_Kakad_Resume.pdf" target="_blank" rel="noopener" class="btn btn--head-resume">RESUME</a>
+      <a href="Aniket_Kakad_Resume_.pdf" target="_blank" rel="noopener" class="btn btn--head-resume">RESUME</a>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
@@ -435,11 +437,11 @@
 
         <div class="gh-activity__body">
           <div class="gh-chart-container">
-            <img class="gh-chart-img" src="https://ghchart.rshah.org/39d353/AniketK100" alt="AniketK100's Live GitHub Contribution Chart" width="670" height="106" loading="lazy" decoding="async" />
+            <img class="gh-chart-img" id="ghChartImg" src="https://ghchart.rshah.org/39d353/AniketK100" alt="AniketK100's Live GitHub Contribution Chart" width="670" height="106" loading="lazy" decoding="async" />
           </div>
 
           <div class="gh-activity__foot">
-            <span class="gh-count">275 contributions in the last year</span>
+            <span class="gh-count" id="ghCount">290 contributions in the last year</span>
             <a href="https://github.com/AniketK100" target="_blank" rel="noopener" class="gh-foot-link">
               View live profile on github.com/AniketK100 <svg viewBox="0 0 12 12" width="12" height="12"><path d="M1 11 11 1M4 1h7v7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
             </a>
