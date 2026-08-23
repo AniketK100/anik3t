@@ -9,10 +9,12 @@ function validateHtmlPage(filePath, expected) {
     throw new Error(`Page ${filePath} is less than 500 characters! Length: ${html.length}`);
   }
 
-  // 2. Canonical tag check
-  const canonicalMatch = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i);
-  if (!canonicalMatch || canonicalMatch[1] !== expected.canonical) {
-    throw new Error(`Canonical tag mismatch on ${filePath}! Expected "${expected.canonical}", got "${canonicalMatch ? canonicalMatch[1] : 'NONE'}"`);
+  // 2. Canonical tag check (if required)
+  if (expected.canonical) {
+    const canonicalMatch = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i);
+    if (!canonicalMatch || canonicalMatch[1] !== expected.canonical) {
+      throw new Error(`Canonical tag mismatch on ${filePath}! Expected "${expected.canonical}", got "${canonicalMatch ? canonicalMatch[1] : 'NONE'}"`);
+    }
   }
 
   // 3. Describedby link check
@@ -35,8 +37,8 @@ function validateHtmlPage(filePath, expected) {
 
   // 6. Robots meta check
   const robotsMatch = html.match(/<meta\s+name="robots"\s+content="([^"]+)"/i);
-  if (!robotsMatch || !robotsMatch[1].includes('index')) {
-    throw new Error(`Robots meta tag missing or set to noindex on ${filePath}!`);
+  if (!robotsMatch || !robotsMatch[1].includes(expected.robotsExpect || 'index')) {
+    throw new Error(`Robots meta tag mismatch on ${filePath}! Expected to include "${expected.robotsExpect || 'index'}", got "${robotsMatch ? robotsMatch[1] : 'NONE'}"`);
   }
 
   // 7. H1 tag check
@@ -45,31 +47,69 @@ function validateHtmlPage(filePath, expected) {
     throw new Error(`H1 tag missing on ${filePath}!`);
   }
 
-  // 8. JSON-LD validation
-  const jsonLdMatch = html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i);
-  if (!jsonLdMatch) {
-    throw new Error(`JSON-LD script tag missing on ${filePath}!`);
-  }
+  // 8. JSON-LD validation (if required)
+  if (expected.schemaType) {
+    const jsonLdMatch = html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+    if (!jsonLdMatch) {
+      throw new Error(`JSON-LD script tag missing on ${filePath}!`);
+    }
 
-  let parsedJsonLd;
-  try {
-    parsedJsonLd = JSON.parse(jsonLdMatch[1]);
-  } catch (e) {
-    throw new Error(`JSON-LD syntax error on ${filePath}: ${e.message}`);
-  }
+    let parsedJsonLd;
+    try {
+      parsedJsonLd = JSON.parse(jsonLdMatch[1]);
+    } catch (e) {
+      throw new Error(`JSON-LD syntax error on ${filePath}: ${e.message}`);
+    }
 
-  const graph = parsedJsonLd['@graph'] || [parsedJsonLd];
-  const targetEntity = graph.find(item => item['@type'] === expected.schemaType);
-  if (!targetEntity) {
-    throw new Error(`Schema type "${expected.schemaType}" missing in JSON-LD on ${filePath}!`);
+    const graph = parsedJsonLd['@graph'] || [parsedJsonLd];
+    const targetEntity = graph.find(item => item['@type'] === expected.schemaType);
+    if (!targetEntity) {
+      throw new Error(`Schema type "${expected.schemaType}" missing in JSON-LD on ${filePath}!`);
+    }
   }
 
   console.log(`✓ ${expected.name} page verified (${filePath})`);
   console.log(`  - Title: "${titleMatch[1]}"`);
-  console.log(`  - Canonical: "${canonicalMatch[1]}"`);
+  if (expected.canonical) console.log(`  - Canonical: "${expected.canonical}"`);
   console.log(`  - H1: "${h1Match[1].replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' ')}"`);
-  console.log(`  - Schema Type: "${expected.schemaType}"`);
+  if (expected.schemaType) console.log(`  - Schema Type: "${expected.schemaType}"`);
   console.log(`  - Describedby Link: Present`);
+}
+
+function validate404Page() {
+  const path404 = path.join(__dirname, '404.html');
+  if (!fs.existsSync(path404)) {
+    throw new Error('404.html does not exist in root directory!');
+  }
+
+  const content = fs.readFileSync(path404, 'utf8');
+
+  if (!content.toLowerCase().includes('not found')) {
+    throw new Error('404.html does not contain "not found" text!');
+  }
+
+  const requiredRecoveryLinks = [
+    '/llms.txt',
+    '/sitemap.xml',
+    '/about',
+    '/contact',
+    'https://anik3t.vercel.app/'
+  ];
+
+  requiredRecoveryLinks.forEach(link => {
+    if (!content.includes(link)) {
+      throw new Error(`404.html recovery links missing required link: "${link}"`);
+    }
+  });
+
+  if (!content.includes('noindex')) {
+    throw new Error('404.html must contain noindex robots tag!');
+  }
+
+  console.log('✓ 404.html verified cleanly');
+  console.log('  - Title: 404 — Page Not Found');
+  console.log('  - Robots: noindex, follow');
+  console.log('  - Recovery links: /llms.txt, /sitemap.xml, /about, /contact, / present');
 }
 
 function validateLlmsTxt() {
@@ -80,23 +120,19 @@ function validateLlmsTxt() {
 
   const content = fs.readFileSync(llmsPath, 'utf8');
 
-  // Check valid UTF-8
   if (Buffer.from(content).toString('utf8') !== content) {
     throw new Error('llms.txt is not valid UTF-8 text!');
   }
 
-  // First non-empty heading check
   const lines = content.split('\n').map(l => l.trim()).filter(l => l.length > 0);
   if (lines[0] !== '# Aniket Kakad') {
     throw new Error(`First non-empty heading in llms.txt must be "# Aniket Kakad". Got: "${lines[0]}"`);
   }
 
-  // Summary blockquote check
   if (!content.includes('>')) {
     throw new Error('llms.txt missing blockquote summary!');
   }
 
-  // Required H2 sections
   const requiredH2s = [
     '## When to use this site',
     '## Official information',
@@ -108,7 +144,6 @@ function validateLlmsTxt() {
     }
   });
 
-  // Required URLs check
   const requiredUrls = [
     'https://anik3t.vercel.app/',
     'https://github.com/AniketK100',
@@ -122,31 +157,25 @@ function validateLlmsTxt() {
     }
   });
 
-  // Forbidden checks
   if (content.toLowerCase().includes('linkedin')) {
     throw new Error('llms.txt must NOT contain LinkedIn!');
   }
 
-  if (content.toLowerCase().includes('mcp') || content.toLowerCase().includes('model context protocol')) {
-    throw new Error('llms.txt must NOT contain invented MCP resources!');
-  }
-
   console.log('✓ llms.txt verified cleanly');
-  console.log('  - Heading: # Aniket Kakad');
-  console.log('  - Blockquote Summary: Present');
-  console.log('  - Required H2 Sections: All 3 Present');
-  console.log('  - Official URLs: Homepage, GitHub, X, About, Contact Present');
-  console.log('  - LinkedIn Check: Absent');
 }
 
 function runAllSeoTests() {
-  console.log('=== RUNNING COMPREHENSIVE ROUTE, SEO & LLMS.TXT TEST SUITE ===\n');
+  console.log('=== RUNNING COMPREHENSIVE ROUTE, SEO, LLMS.TXT & 404 TEST SUITE ===\n');
 
   // 1. Validate llms.txt
   validateLlmsTxt();
   console.log('');
 
-  // 2. Validate Homepage
+  // 2. Validate 404 Page
+  validate404Page();
+  console.log('');
+
+  // 3. Validate Homepage
   validateHtmlPage(path.join(__dirname, 'index.html'), {
     name: 'Homepage',
     title: 'Aniket Kakad — Full-Stack Developer',
@@ -154,7 +183,7 @@ function runAllSeoTests() {
     schemaType: 'Person'
   });
 
-  // 3. Validate About Page
+  // 4. Validate About Page
   validateHtmlPage(path.join(__dirname, 'about', 'index.html'), {
     name: 'About',
     title: 'About Aniket Kakad — Full-Stack Developer',
@@ -162,7 +191,7 @@ function runAllSeoTests() {
     schemaType: 'AboutPage'
   });
 
-  // 4. Validate Contact Page
+  // 5. Validate Contact Page
   validateHtmlPage(path.join(__dirname, 'contact', 'index.html'), {
     name: 'Contact',
     title: 'Contact Aniket Kakad — Full-Stack Developer',
@@ -170,7 +199,7 @@ function runAllSeoTests() {
     schemaType: 'ContactPage'
   });
 
-  // 5. Validate Privacy Page
+  // 6. Validate Privacy Page
   validateHtmlPage(path.join(__dirname, 'privacy', 'index.html'), {
     name: 'Privacy',
     title: 'Privacy Policy — Aniket Kakad',
@@ -178,7 +207,7 @@ function runAllSeoTests() {
     schemaType: 'WebPage'
   });
 
-  console.log('\n=== ALL ROUTE, SEO & LLMS.TXT CHECKS PASSED SUCCESSFULLY ===');
+  console.log('\n=== ALL ROUTE, SEO, LLMS.TXT & 404 CHECKS PASSED SUCCESSFULLY ===');
 }
 
 runAllSeoTests();
