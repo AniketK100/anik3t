@@ -62,9 +62,57 @@ function validateHtmlPage(filePath, expected) {
     }
 
     const graph = parsedJsonLd['@graph'] || [parsedJsonLd];
-    const targetEntity = graph.find(item => item['@type'] === expected.schemaType);
+
+    // Verify main target entity
+    const targetEntity = graph.find(item => {
+      const type = item['@type'];
+      return Array.isArray(type) ? type.includes(expected.schemaType) : type === expected.schemaType;
+    });
+
     if (!targetEntity) {
       throw new Error(`Schema type "${expected.schemaType}" missing in JSON-LD on ${filePath}!`);
+    }
+
+    // Special verification for About page ProfilePage & Person graph
+    if (expected.schemaType === 'ProfilePage') {
+      if (targetEntity.url !== 'https://anik3t.vercel.app/about') {
+        throw new Error(`ProfilePage url mismatch on ${filePath}! Expected "https://anik3t.vercel.app/about", got "${targetEntity.url}"`);
+      }
+
+      if (!targetEntity.mainEntity || targetEntity.mainEntity['@id'] !== 'https://anik3t.vercel.app/#person') {
+        throw new Error(`ProfilePage mainEntity @id mismatch on ${filePath}! Expected "https://anik3t.vercel.app/#person"`);
+      }
+
+      // Check exactly one Person entity exists in graph
+      const personEntities = graph.filter(item => item['@type'] === 'Person');
+      if (personEntities.length !== 1) {
+        throw new Error(`Expected exactly 1 Person entity in graph on ${filePath}, found ${personEntities.length}!`);
+      }
+
+      const person = personEntities[0];
+      if (person['@id'] !== 'https://anik3t.vercel.app/#person') {
+        throw new Error(`Person @id mismatch on ${filePath}! Expected "https://anik3t.vercel.app/#person", got "${person['@id']}"`);
+      }
+
+      if (person.name !== 'Aniket Kakad') {
+        throw new Error(`Person name mismatch on ${filePath}! Expected "Aniket Kakad", got "${person.name}"`);
+      }
+
+      if (person.url !== 'https://anik3t.vercel.app/') {
+        throw new Error(`Person url mismatch on ${filePath}! Expected "https://anik3t.vercel.app/", got "${person.url}"`);
+      }
+
+      const approvedSameAs = [
+        'https://github.com/AniketK100',
+        'https://x.com/Anik3t_kakad'
+      ];
+      if (!Array.isArray(person.sameAs) || JSON.stringify(person.sameAs.sort()) !== JSON.stringify(approvedSameAs.sort())) {
+        throw new Error(`Person sameAs mismatch on ${filePath}! Expected approved profiles, got ${JSON.stringify(person.sameAs)}`);
+      }
+
+      if (JSON.stringify(person).toLowerCase().includes('linkedin')) {
+        throw new Error(`LinkedIn must NOT be present in Person entity on ${filePath}!`);
+      }
     }
   }
 
@@ -165,7 +213,7 @@ function validateLlmsTxt() {
 }
 
 function runAllSeoTests() {
-  console.log('=== RUNNING COMPREHENSIVE ROUTE, SEO, LLMS.TXT & 404 TEST SUITE ===\n');
+  console.log('=== RUNNING COMPREHENSIVE ROUTE, SEO, PROFILEPAGE, LLMS.TXT & 404 TEST SUITE ===\n');
 
   // 1. Validate llms.txt
   validateLlmsTxt();
@@ -183,12 +231,12 @@ function runAllSeoTests() {
     schemaType: 'Person'
   });
 
-  // 4. Validate About Page
+  // 4. Validate About Page (ProfilePage & Person Graph)
   validateHtmlPage(path.join(__dirname, 'about', 'index.html'), {
     name: 'About',
     title: 'About Aniket Kakad — Full-Stack Developer',
     canonical: 'https://anik3t.vercel.app/about',
-    schemaType: 'AboutPage'
+    schemaType: 'ProfilePage'
   });
 
   // 5. Validate Contact Page
@@ -207,7 +255,7 @@ function runAllSeoTests() {
     schemaType: 'WebPage'
   });
 
-  console.log('\n=== ALL ROUTE, SEO, LLMS.TXT & 404 CHECKS PASSED SUCCESSFULLY ===');
+  console.log('\n=== ALL ROUTE, SEO, PROFILEPAGE, LLMS.TXT & 404 CHECKS PASSED SUCCESSFULLY ===');
 }
 
 runAllSeoTests();
