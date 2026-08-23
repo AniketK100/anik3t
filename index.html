@@ -39,37 +39,59 @@
   <meta name="twitter:image" content="assets/og-image.webp">
   <meta name="twitter:image" content="https://anik3t.vercel.app/assets/og-image.webp">
 
-  <!-- Structured Data (Schema.org / Person) -->
+  <!-- Structured Data (Schema.org / Person & WebSite Graph) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Aniket Kakad",
-    "jobTitle": "Full-Stack Developer",
-    "url": "https://anik3t.vercel.app/",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Mumbai",
-      "addressCountry": "India"
-    },
-    "sameAs": [
-      "https://github.com/AniketK100",
-      "https://linkedin.com/in/aniket-kakad"
-    ],
-    "knowsAbout": [
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "PostgreSQL",
-      "Redis",
-      "Java",
-      "Spring Boot",
-      "Docker",
-      "WebRTC",
-      "Socket.IO"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anik3t.vercel.app/#website",
+        "url": "https://anik3t.vercel.app/",
+        "name": "Aniket Kakad",
+        "description": "Aniket Kakad is a full-stack developer from Mumbai building real-time web applications, AI integrations, and high-performance backend systems.",
+        "publisher": {
+          "@id": "https://anik3t.vercel.app/#person"
+        },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anik3t.vercel.app/#person",
+        "name": "Aniket Kakad",
+        "jobTitle": "Full-Stack Developer",
+        "url": "https://anik3t.vercel.app/",
+        "image": "https://anik3t.vercel.app/assets/og-image.webp",
+        "description": "Full-stack developer building real-time web applications, AI integrations, and high-performance backend systems.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Mumbai",
+          "addressCountry": "India"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Watumull Institute of Engineering & Technology"
+        },
+        "sameAs": [
+          "https://github.com/AniketK100",
+          "https://x.com/Anik3t_kakad"
+        ],
+        "knowsAbout": [
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "PostgreSQL",
+          "Redis",
+          "Java",
+          "Spring Boot",
+          "Docker",
+          "WebRTC",
+          "Socket.IO"
+        ]
+      }
     ]
   }
   </script>
