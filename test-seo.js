@@ -23,6 +23,12 @@ function validateHtmlPage(filePath, expected) {
     throw new Error(`rel="describedby" link missing on ${filePath}!`);
   }
 
+  // 3b. Google Analytics Tag (gtag.js) check - must exist exactly once
+  const gtagMatches = html.match(/googletagmanager\.com\/gtag\/js\?id=G-SVP8YVB8R1/g);
+  if (!gtagMatches || gtagMatches.length !== 1) {
+    throw new Error(`Google Analytics tag G-SVP8YVB8R1 missing or duplicated on ${filePath}! Found count: ${gtagMatches ? gtagMatches.length : 0}`);
+  }
+
   // 4. Title tag check
   const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
   if (!titleMatch || titleMatch[1] !== expected.title) {
@@ -152,6 +158,11 @@ function validate404Page() {
 
   if (!content.includes('noindex')) {
     throw new Error('404.html must contain noindex robots tag!');
+  }
+
+  const gtagMatches = content.match(/googletagmanager\.com\/gtag\/js\?id=G-SVP8YVB8R1/g);
+  if (!gtagMatches || gtagMatches.length !== 1) {
+    throw new Error(`Google Analytics tag G-SVP8YVB8R1 missing or duplicated on 404.html! Found count: ${gtagMatches ? gtagMatches.length : 0}`);
   }
 
   console.log('✓ 404.html verified cleanly');
