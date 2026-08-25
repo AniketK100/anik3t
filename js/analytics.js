@@ -118,9 +118,9 @@
             contact_type: 'email',
             destination: href
           });
-        } else if (href.startsWith('tel:')) {
-          trackEvent('contact_clicked', {
-            contact_type: 'phone',
+        } else if (href.includes('x.com') || href.includes('twitter.com')) {
+          trackEvent('social_link_clicked', {
+            platform: 'x',
             destination: href
           });
         } else if (href.includes('github.com')) {
