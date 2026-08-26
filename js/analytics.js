@@ -45,16 +45,6 @@
       });
     });
 
-    // 3. RESUME TRACKING
-    document.querySelectorAll('a[href*="Resume"], .btn--head-resume').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        trackEvent('resume_clicked', {
-          button_name: 'Resume',
-          destination: btn.getAttribute('href') || 'Aniket_Kakad_Resume_.pdf'
-        });
-      });
-    });
-
     // 4. PROJECT CARD & MODAL OPEN TRACKING
     document.querySelectorAll('.proj-row').forEach(function (row) {
       var projId = row.getAttribute('data-proj-id') || '';

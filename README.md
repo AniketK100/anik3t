@@ -14,7 +14,6 @@ A modern, high-performance developer portfolio featuring a living real-time ASCI
   - **Loopora**: AI interview preparation platform with 500+ questions & video explanations.
 - **Kinetic Smooth Scroll**: Powered by Lenis and GSAP ScrollTrigger for fluid, inertia-based navigation.
 - **Fully Responsive UI**: Mobile-first layout with a dedicated mobile menu, adaptive grids, and fluid `clamp()`-based typography across phones, tablets, and desktops.
-- **Resume Download**: One-click download of the PDF resume from the header.
 - **SEO & Social Optimized**: OpenGraph, Twitter Cards, Schema.org JSON-LD, hreflang, robots.txt, sitemap.xml, and llms.txt.
 
 ---
@@ -45,7 +44,6 @@ Aniket/
 │   ├── ascii.js             # Real-time ASCII animation engine
 │   ├── main.js              # GSAP animations, Lenis scroll, modal logic, nav interactions
 │   └── portrait-data.js     # High-precision pre-computed luminance matrix
-├── Aniket_Kakad_Resume.pdf  # Downloadable PDF resume
 ├── favicon.svg              # SVG Favicon
 ├── index.html               # Main HTML entry point
 ├── llms.txt                 # LLM/AI crawler summary (llmstxt.org standard)
