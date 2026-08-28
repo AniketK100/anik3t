@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naukri Shows 100+ Applicants. I Wanted the Exact Number. — Aniket Kakad</title>
+  <meta name="description" content="How I built a privacy-first Manifest V3 Chrome extension to extract exact applicant counts, openings, and views hidden behind Naukri's rounded '100+ Applicants' labels.">
+  <meta name="keywords" content="Manifest V3, JavaScript, DOM Interception, Privacy, Reverse Engineering, Aniket Kakad">
+  <meta name="author" content="Aniket Kakad">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://us-assets.i.posthog.com https://www.googletagmanager.com https://*.googletagmanager.com https://platform.twitter.com https://cdn.syndication.twimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://ghchart.rshah.org https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://*.googletagmanager.com https://syndication.twitter.com https://pbs.twimg.com https://abs.twimg.com; connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com https://ghchart.rshah.org https://cdn.jsdelivr.net https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.googletagmanager.com https://*.googletagmanager.com https://cdn.syndication.twimg.com https://syndication.twitter.com; frame-src 'self' https://platform.twitter.com https://syndication.twitter.com https://x.com; worker-src 'self' blob:; base-uri 'self'; form-action 'self';">
+
+  <!-- SEO & Canonical Links -->
+  <link rel="canonical" href="https://anik3t.vercel.app/blog/naukri-exact-applicant-count/">
+  <link rel="describedby" href="/llms.txt">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Aniket Kakad">
+  <meta property="og:url" content="https://anik3t.vercel.app/blog/naukri-exact-applicant-count/">
+  <meta property="og:title" content="Naukri Shows 100+ Applicants. I Wanted the Exact Number.">
+  <meta property="og:description" content="How I built a privacy-first Manifest V3 Chrome extension to extract exact applicant counts, openings, and views hidden behind Naukri's rounded '100+ Applicants' labels.">
+  <meta property="og:image" content="https://anik3t.vercel.app/assets/blog/naukri-exact-applicant-count/cover.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@Anik3t_kakad">
+  <meta name="twitter:creator" content="@Anik3t_kakad">
+  <meta name="twitter:title" content="Naukri Shows 100+ Applicants. I Wanted the Exact Number.">
+  <meta name="twitter:description" content="How I built a privacy-first Manifest V3 Chrome extension to extract exact applicant counts, openings, and views hidden behind Naukri's rounded '100+ Applicants' labels.">
+  <meta name="twitter:image" content="https://anik3t.vercel.app/assets/blog/naukri-exact-applicant-count/cover.webp">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://anik3t.vercel.app/blog/naukri-exact-applicant-count/#article",
+  "headline": "Naukri Shows 100+ Applicants. I Wanted the Exact Number.",
+  "description": "How I built a privacy-first Manifest V3 Chrome extension to extract exact applicant counts, openings, and views hidden behind Naukri's rounded '100+ Applicants' labels.",
+  "image": "https://anik3t.vercel.app/assets/blog/naukri-exact-applicant-count/cover.webp",
+  "keywords": "Manifest V3, JavaScript, DOM Interception, Privacy, Reverse Engineering",
+  "datePublished": "2026-08-28",
+  "dateModified": "2026-08-28",
+  "isPartOf": {
+    "@id": "https://anik3t.vercel.app/#website"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://anik3t.vercel.app/blog/naukri-exact-applicant-count/"
+  },
+  "author": {
+    "@type": "Person",
+    "@id": "https://anik3t.vercel.app/#person",
+    "name": "Aniket Kakad",
+    "url": "https://anik3t.vercel.app/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "@id": "https://anik3t.vercel.app/#person",
+    "name": "Aniket Kakad",
+    "url": "https://anik3t.vercel.app/"
+  }
+}
+  </script>
+
+  <!-- Fonts & Core Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- Google Analytics (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVP8YVB8R1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SVP8YVB8R1');
+  </script>
+
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}var w=e;for("undefined"!=typeof a?w=e[a]=[]:a="posthog",w.people=w.people||[],w.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},w.people.toString=function(){return w.toString(1)+".people (stub)"},p="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),r=0;r<p.length;r++)g(w,p[r]);e._i.push([i,s,a])},e.__SV=1.0,
+    n=t.createElement("script"),p=t.getElementsByTagName("script")[0],n.async=1,
+    n.src=(window.location.protocol.indexOf('http')===0&&window.location.hostname.indexOf('vercel.app')!==-1)?"/ingest/static/array.js":"https://us-assets.i.posthog.com/static/array.js",
+    p.parentNode.insertBefore(n,p))}(document,window.posthog||[]);
+    var isVercel = window.location.protocol.indexOf('http') === 0 && window.location.hostname.indexOf('vercel.app') !== -1;
+    posthog.init('phc_ng2VRfFtNoq2RLh6CNXLUxoQwF4TpySBtBnKY8xaME5F', {
+      api_host: isVercel ? '/ingest' : 'https://us.i.posthog.com',
+      ui_host: 'https://us.posthog.com',
+      person_profiles: 'identified_only',
+      capture_pageview: true
+    });
+  </script>
+
+  <!-- Article Layout & Typography Custom CSS -->
+  <style>
+    .article-wrap { max-width: 1360px; margin: 0 auto; padding: 75px var(--pad-inline) 80px; display: grid; grid-template-columns: 1fr; gap: 3.5rem; }
+    .article-main { min-width: 0; }
+    .article-header { margin-bottom: 2.2rem; border-bottom: 1px solid var(--line); padding-bottom: 1.8rem; }
+    .article-meta-top { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+    .article-h1 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); font-family: var(--font-disp); color: var(--text); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+    .article-subtitle { font-size: 1.15rem; color: var(--text-2); line-height: 1.6; }
+    
+    /* Content Styling */
+    .blog-p { font-size: 1.05rem; color: var(--text); line-height: 1.75; margin-bottom: 1.6rem; }
+    .blog-h2 { font-size: 1.75rem; font-family: var(--font-disp); color: var(--text); font-weight: 700; margin: 2.8rem 0 1.2rem; border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; }
+    .blog-h3 { font-size: 1.3rem; font-family: var(--font-disp); color: var(--text); font-weight: 600; margin: 2.2rem 0 1rem; }
+    .blog-ul { margin: 0 0 1.8rem 1.5rem; color: var(--text); line-height: 1.7; }
+    .blog-li { margin-bottom: 0.5rem; }
+    .blog-hr { border: none; border-top: 1px solid var(--line); margin: 3rem 0; }
+    .blog-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+    .blog-link:hover { color: #ff6a26; }
+    .inline-code { font-family: var(--font-mono); font-size: 0.9em; background: var(--panel); color: var(--accent); padding: 0.15em 0.4em; border-radius: 4px; border: 1px solid var(--line); }
+    .code-block { background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px; padding: 1.2rem; overflow-x: auto; margin: 1.5rem 0 2rem; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.6; color: var(--text); }
+    .code-block code { font-family: inherit; }
+
+    /* SVG Architecture Diagram Wrapper */
+    .svg-diagram-wrap {
+      margin: 2.5rem 0;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    }
+    .svg-diagram-wrap svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Modern Dark Pipeline Architecture Diagram Component */
+    .pipeline-diagram {
+      background: var(--bg-2);
+      border: 1px solid var(--line-2);
+      border-radius: 12px;
+      margin: 2.5rem 0;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+    .pipeline-head {
+      background: #18181C;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .pipeline-dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .pipeline-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .pipeline-dots .red { background: #FF5F56; }
+    .pipeline-dots .yellow { background: #FFBD2E; }
+    .pipeline-dots .green { background: #27C93F; }
+    .pipeline-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-2);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      flex-grow: 1;
+    }
+    .pipeline-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .pipeline-body {
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .pipeline-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    .step-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+    .step-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .step-card:hover {
+      border-color: var(--accent-line);
+      transform: translateY(-2px);
+    }
+    .step-card--blue { border-left: 3px solid #3B82F6; }
+    .step-card--orange { border-left: 3px solid var(--accent); }
+    .step-card--purple { border-left: 3px solid #A855F7; }
+    .step-card--green { border-left: 3px solid #10B981; }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .step-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+    .badge-blue { color: #60A5FA; background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.3); }
+    .badge-orange { color: #FF7A3D; background: var(--accent-soft); border: 1px solid var(--accent-line); }
+    .badge-purple { color: #C084FC; background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.3); }
+    .badge-green { color: #34D399; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    .step-file {
+      font-family: var(--font-disp);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .step-text {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .step-code {
+      margin-top: 0.8rem;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.5rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #34D399;
+    }
+
+    .pipeline-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0.8rem 0;
+      width: 100%;
+    }
+    .connector-line {
+      width: 2px;
+      height: 16px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+    .connector-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      background: var(--bg);
+      border: 1px solid var(--accent-line);
+      padding: 0.2rem 0.7rem;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .pipeline-subgrid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    @media (min-width: 600px) {
+      .pipeline-subgrid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Sleek X Embed Card & Action Button */
+    .x-embed-card {
+      margin: 2.2rem 0;
+      max-width: 550px;
+      width: 100%;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.2rem;
+      box-sizing: border-box;
+    }
+    .x-embed-inner {
+      min-height: 250px;
+      width: 100%;
+    }
+    .x-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: var(--bg-2);
+      border: 1px solid var(--accent-line);
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 1rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .x-link-btn:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    /* Table of Contents Styling */
+    .toc-container {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+      margin: 2.2rem 0;
+    }
+    .toc-head {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .toc-list li a {
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+      color: var(--text-2);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .toc-list li a:hover,
+    .toc-list li a.is-active-toc {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+    .toc-num {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+    [id] {
+      scroll-margin-top: 100px;
+    }
+
+    @media (min-width: 1024px) {
+      .toc-mobile-only { display: none !important; }
+    }
+    @media (max-width: 1023px) {
+      .toc-desktop-only { display: none !important; }
+    }
+
+    /* Back To Top Button Styling */
+    .back-to-top-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 3rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1.5rem;
+    }
+    .back-to-top-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .back-to-top-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-2);
+    }
+
+    /* Footer Styling */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 3rem var(--pad-inline);
+      margin-top: 4rem;
+      background: var(--bg);
+    }
+    .footer__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer__logo {
+      font-family: var(--font-disp);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .footer__logo em {
+      color: var(--accent);
+      font-style: normal;
+    }
+    .footer__copy {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-3);
+      margin-top: 0.4rem;
+    }
+    .footer__links {
+      display: flex;
+      gap: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+    }
+    .footer__links a {
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer__links a:hover {
+      color: var(--accent);
+    }
+
+    /* Sidebar Styling */
+    .article-sidebar { font-family: var(--font-mono); }
+    .sidebar-sticky-wrap { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .sidebar-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1.6rem; }
+    .sidebar-title { font-size: 0.8rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.2rem; display: block; border-bottom: 1px solid var(--line); padding-bottom: 0.6rem; }
+    .sidebar-group { margin-bottom: 1.2rem; }
+    .sidebar-label { font-size: 0.72rem; color: var(--text-3); text-transform: uppercase; display: block; margin-bottom: 0.3rem; }
+    .sidebar-value { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+    .sidebar-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .sidebar-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.85rem; padding: 0.75rem 1rem; border-radius: 6px; text-decoration: none; font-weight: 700; width: 100%; margin-top: 0.8rem; transition: background 0.2s; }
+    .btn-github { background: var(--bg-2); border: 1px solid var(--line); color: var(--text); }
+    .btn-github:hover { border-color: var(--text-2); }
+
+    @media (min-width: 1024px) {
+      .article-wrap { grid-template-columns: 1fr 320px; }
+    }
+  </style>
+</head>
+<body class="is-loaded">
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-head" id="siteHead">
+    <a class="head__logo" href="/">ANIKET<em>.</em></a>
+    <nav class="head__nav" aria-label="Primary">
+      <a href="/#profile"><span class="n">01</span>PROFILE</a>
+      <a href="/#experience"><span class="n">02</span>EXPERIENCE</a>
+      <a href="/#work"><span class="n">03</span>PROJECTS</a>
+      <a href="/#stack"><span class="n">04</span>TECH STACK</a>
+      <a href="/#certifications"><span class="n">05</span>CERTIFICATIONS</a>
+      <a href="/blog/" class="is-active"><span class="n">06</span>BLOG</a>
+      <a href="/contact"><span class="n">07</span>CONTACT</a>
+    </nav>
+    <div class="head__right">
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__nav" aria-label="Mobile">
+      <a href="/#profile" class="menu__link"><span>01</span>PROFILE</a>
+      <a href="/#experience" class="menu__link"><span>02</span>EXPERIENCE</a>
+      <a href="/#work" class="menu__link"><span>03</span>PROJECTS</a>
+      <a href="/#stack" class="menu__link"><span>04</span>TECH STACK</a>
+      <a href="/#certifications" class="menu__link"><span>05</span>CERTIFICATIONS</a>
+      <a href="/blog/" class="menu__link is-active"><span>06</span>BLOG</a>
+      <a href="/contact" class="menu__link"><span>07</span>CONTACT</a>
+    </nav>
+  </div>
+
+  <main id="mainContent">
+    <article class="article-wrap">
+      <div class="article-main">
+        <header class="article-header">
+          <div class="article-meta-top">
+            <span>Chrome Extension</span>
+            <span>&bull;</span>
+            <time datetime="2026-08-28">August 28, 2026</time>
+            <span>&bull;</span>
+            <span>4 min read</span>
+          </div>
+          <h1 class="article-h1">Naukri Shows 100+ Applicants. I Wanted the Exact Number.</h1>
+          <p class="article-subtitle">How I built a privacy-first Manifest V3 Chrome extension to extract exact applicant counts, openings, and views hidden behind Naukri's rounded '100+ Applicants' labels.</p>
+        </header>
+
+        <div class="article-body">
+<div id="overview"></div>
+
+<p class="blog-p">While browsing job postings on Naukri.com, I noticed something frustrating. Whether a job had 105 applicants or 3,900 applicants, the UI showed the exact same badge: <strong>"100+ Applicants"</strong>.</p>
+
+<p class="blog-p">For job seekers trying to gauge competition and response rates, <code class="inline-code">100+ Applicants</code> is virtually meaningless. There is a massive difference between applying to a role with 110 applicants versus a role flooded with 4,000 applications.</p>
+
+<p class="blog-p">I decided to open DevTools, inspect Naukri's network traffic, and build a browser extension to fix it.</p>
+
+<!-- IN-BODY MOBILE TABLE OF CONTENTS (Visible on Mobile/Tablet) -->
+<div class="toc-container toc-mobile-only">
+  <div class="toc-head">
+    <span class="toc-title">TABLE OF CONTENTS</span>
+  </div>
+  <ul class="toc-list">
+    <li><a href="#overview"><span class="toc-num">00</span> Introduction</a></li>
+    <li><a href="#finding-the-data"><span class="toc-num">01</span> Finding the Underlying Data</a></li>
+    <li><a href="#architecture"><span class="toc-num">02</span> Chrome Extension Architecture (Manifest V3)</a></li>
+    <li><a href="#privacy"><span class="toc-num">03</span> Handling Edge Cases &amp; Privacy</a></li>
+    <li><a href="#demo-video"><span class="toc-num">04</span> Demo Video &amp; Build Share</a></li>
+    <li><a href="#source-code"><span class="toc-num">05</span> Source Code</a></li>
+  </ul>
+</div>
+
+<hr class="blog-hr" />
+
+<h2 class="blog-h2" id="finding-the-data">1. Finding the Underlying Data</h2>
+
+<p class="blog-p">I opened Chrome DevTools Network panel, filtered for Fetch/XHR requests, and navigated through a few job postings.</p>
+
+<p class="blog-p">Naukri's web client fetches JSON job details from internal API endpoints like <code class="inline-code">/jobapi/v3/job/...</code>. When inspecting the raw response payloads, the server wasn't returning rounded strings. It was returning raw integers:</p>
+
+<pre class="code-block lang-json"><code>{
+  "applyCount": 3781,
+  "vacancy": 12,
+  "viewCount": 18450
+}</code></pre>
+
+<p class="blog-p">The UI was intentionally rounding <code class="inline-code">applyCount</code> down to <code class="inline-code">100+</code> or <code class="inline-code">500+</code> before rendering the HTML. The actual exact numbers were already sitting in memory in the browser.</p>
+
+<hr class="blog-hr" />
+
+<h2 class="blog-h2" id="architecture">2. Chrome Extension Architecture (Manifest V3)</h2>
+
+<p class="blog-p">I built <strong>Naukri Exact Applicants</strong> as a privacy-first Manifest V3 extension.</p>
+
+<p class="blog-p">Because modern Chrome extensions run content scripts in an isolated execution environment, content scripts cannot directly inspect page-level <code class="inline-code">window.fetch</code> or <code class="inline-code">XMLHttpRequest</code> objects. To capture the network responses reliably without making secondary duplicate requests, I designed a multi-layer architecture:</p>
+
+<!-- START_PIPELINE -->
+<div class="svg-diagram-wrap">
+  <svg viewBox="0 0 800 540" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" font-family="'Space Grotesk', system-ui, -apple-system, sans-serif">
+    <defs>
+      <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#121216"/>
+        <stop offset="100%" stop-color="#18181F"/>
+      </linearGradient>
+
+      <marker id="arrowOrange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 8 5 L 0 9 z" fill="#FF4D00" />
+      </marker>
+      <marker id="arrowPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 8 5 L 0 9 z" fill="#A855F7" />
+      </marker>
+      <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 8 5 L 0 9 z" fill="#10B981" />
+      </marker>
+    </defs>
+
+    <!-- Outer Frame -->
+    <rect x="2" y="2" width="796" height="536" rx="14" fill="url(#bgGrad)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
+
+    <!-- Top Window Bar -->
+    <path d="M 2 16 Q 2 2 16 2 L 784 2 Q 798 2 798 16 L 798 44 L 2 44 Z" fill="#1A1A20" />
+    <line x1="2" y1="44" x2="798" y2="44" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+
+    <!-- Dots -->
+    <circle cx="24" cy="23" r="5" fill="#FF5F56" />
+    <circle cx="40" cy="23" r="5" fill="#FFBD2E" />
+    <circle cx="56" cy="23" r="5" fill="#27C93F" />
+
+    <!-- Header Titles -->
+    <text x="80" y="27" fill="#A1A1AA" font-size="12" font-family="'Space Mono', monospace" font-weight="700" letter-spacing="1">EXTENSION DATA INTERCEPTION PIPELINE</text>
+    <rect x="660" y="13" width="120" height="20" rx="4" fill="rgba(255, 77, 0, 0.15)" stroke="#FF4D00" stroke-width="1" />
+    <text x="720" y="27" fill="#FF4D00" font-size="10" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">MANIFEST V3</text>
+
+    <!-- NODE 1: MAIN WORLD -->
+    <g transform="translate(180, 68)">
+      <rect x="0" y="0" width="440" height="90" rx="10" fill="#1B1B22" stroke="#3B82F6" stroke-width="2" />
+      <rect x="12" y="-10" width="170" height="20" rx="4" fill="#1D283A" stroke="#3B82F6" stroke-width="1" />
+      <text x="97" y="4" fill="#60A5FA" font-size="10" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">MAIN WORLD (Page Context)</text>
+      
+      <text x="20" y="34" fill="#FFFFFF" font-size="16" font-weight="700">mainWorldScript.js</text>
+      <text x="20" y="54" fill="#A1A1AA" font-size="12">Hooks window.fetch &amp; XMLHttpRequest in page memory</text>
+      <text x="20" y="74" fill="#34D399" font-size="11" font-family="'Space Mono', monospace">Intercepts /jobapi/ JSON responses -&gt; applyCount: 3781</text>
+    </g>
+
+    <!-- CONNECTOR 1: DOWN TO ISOLATED WORLD -->
+    <path d="M 400 158 L 400 198" stroke="#FF4D00" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrowOrange)" />
+    <rect x="315" y="170" width="170" height="20" rx="10" fill="#121216" stroke="#FF4D00" stroke-width="1" />
+    <text x="400" y="184" fill="#FF4D00" font-size="10" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">window.postMessage</text>
+
+    <!-- NODE 2: ISOLATED WORLD -->
+    <g transform="translate(180, 206)">
+      <rect x="0" y="0" width="440" height="85" rx="10" fill="#1B1B22" stroke="#FF4D00" stroke-width="2" />
+      <rect x="12" y="-10" width="140" height="20" rx="4" fill="#2D1A15" stroke="#FF4D00" stroke-width="1" />
+      <text x="82" y="4" fill="#FF7A3D" font-size="10" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">ISOLATED WORLD</text>
+      
+      <text x="20" y="34" fill="#FFFFFF" font-size="16" font-weight="700">contentScript.js</text>
+      <text x="20" y="54" fill="#A1A1AA" font-size="12">Content script coordinator. Validates active jobId &amp; security.</text>
+      <text x="20" y="72" fill="#E4E4E7" font-size="11" font-family="'Space Mono', monospace">Dispatches extracted data payload to sub-modules</text>
+    </g>
+
+    <!-- BRANCHING ARROWS -->
+    <path d="M 400 291 L 400 320" stroke="rgba(255, 255, 255, 0.25)" stroke-width="2" />
+    <path d="M 205 320 L 595 320" stroke="rgba(255, 255, 255, 0.25)" stroke-width="2" />
+    <path d="M 205 320 L 205 354" stroke="#A855F7" stroke-width="2" marker-end="url(#arrowPurple)" />
+    <path d="M 595 320 L 595 354" stroke="#10B981" stroke-width="2" marker-end="url(#arrowGreen)" />
+
+    <!-- NODE 3A: SPA LISTENER -->
+    <g transform="translate(30, 364)">
+      <rect x="0" y="0" width="350" height="142" rx="10" fill="#1B1B22" stroke="#A855F7" stroke-width="2" />
+      <rect x="12" y="-10" width="130" height="20" rx="4" fill="#261A33" stroke="#A855F7" stroke-width="1" />
+      <text x="77" y="4" fill="#C084FC" font-size="10" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">SPA NAVIGATION</text>
+      
+      <text x="20" y="34" fill="#FFFFFF" font-size="15" font-weight="700">navigationObserver.js</text>
+      <text x="20" y="55" fill="#A1A1AA" font-size="12">Monitors SPA soft navigations:</text>
+      <text x="20" y="77" fill="#C084FC" font-size="11" font-family="'Space Mono', monospace">• pushState &amp; popstate events</text>
+      <text x="20" y="96" fill="#C084FC" font-size="11" font-family="'Space Mono', monospace">• MutationObserver DOM changes</text>
+      <text x="20" y="120" fill="#71717A" font-size="11">Triggers updates on page switches</text>
+    </g>
+
+    <!-- NODE 3B: DOM INJECTOR -->
+    <g transform="translate(420, 364)">
+      <rect x="0" y="0" width="350" height="142" rx="10" fill="#1B1B22" stroke="#10B981" stroke-width="2" />
+      <rect x="12" y="-10" width="120" height="20" rx="4" fill="#162B23" stroke="#10B981" stroke-width="1" />
+      <text x="72" y="4" fill="#34D399" font-size="10" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">DOM INJECTION</text>
+      
+      <text x="20" y="34" fill="#FFFFFF" font-size="15" font-weight="700">uiInjector.js</text>
+      <text x="20" y="54" fill="#A1A1AA" font-size="12">TreeWalker native text replacement:</text>
+      
+      <rect x="20" y="65" width="310" height="38" rx="4" fill="#121216" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1" />
+      <text x="30" y="81" fill="#EF4444" font-size="11" font-family="'Space Mono', monospace" text-decoration="line-through">100+ Applicants</text>
+      <text x="155" y="81" fill="#34D399" font-size="11" font-family="'Space Mono', monospace" font-weight="700">➜ 3,781 Applicants</text>
+      <text x="30" y="96" fill="#A1A1AA" font-size="10" font-family="'Space Mono', monospace">+ Openings (12) &amp; Views (18.4k) badges</text>
+      <text x="20" y="122" fill="#71717A" font-size="11">Zero layout shifts or UI flicker</text>
+    </g>
+  </svg>
+</div>
+<!-- END_PIPELINE -->
+
+<h3 class="blog-h3">Key Modules:</h3>
+<ul class="blog-ul">
+<li class="blog-li"><strong><code class="inline-code">mainWorldScript.js</code></strong>: Injected into Chrome's <code class="inline-code">MAIN</code> execution world (<code class="inline-code">world: "MAIN"</code> in Manifest V3). It hooks <code class="inline-code">fetch</code> and <code class="inline-code">XMLHttpRequest.prototype.open</code> to intercept responses matching Naukri job API patterns and broadcasts extracted data via <code class="inline-code">window.postMessage</code>.</li>
+<li class="blog-li"><strong><code class="inline-code">contentScript.js</code></strong>: Listens for <code class="inline-code">postMessage</code> events in the isolated content script world, extracts and validates the job ID, and dispatches data to sub-modules.</li>
+<li class="blog-li"><strong><code class="inline-code">apiFetcher.js</code></strong>: Handles intercepted API data payload parsing, fallback network checks, and response validation.</li>
+<li class="blog-li"><strong><code class="inline-code">jobDetector.js</code></strong>: Extracts internal numerical job IDs from URL paths (e.g. <code class="inline-code">job-listings-...-&lt;jobId&gt;</code>) or DOM datasets.</li>
+<li class="blog-li"><strong><code class="inline-code">navigationObserver.js</code></strong>: Naukri operates as a Single Page Application (SPA). As you click between job listings, the page doesn't reload. <code class="inline-code">navigationObserver.js</code> listens to <code class="inline-code">pushState</code>, <code class="inline-code">replaceState</code>, <code class="inline-code">popstate</code>, and DOM mutations to trigger instant updates on soft navigations.</li>
+<li class="blog-li"><strong><code class="inline-code">uiInjector.js</code></strong>: Uses a DOM <code class="inline-code">TreeWalker</code> to locate the exact text nodes displaying <code class="inline-code">100+ Applicants</code> and updates them in place with exact counts (e.g. <code class="inline-code">3,781 Applicants</code>). It also appends subtle dark badges for <code class="inline-code">Openings</code> (12) and <code class="inline-code">Views</code> (18.4k).</li>
+</ul>
+
+<hr class="blog-hr" />
+
+<h2 class="blog-h2" id="privacy">3. Handling Edge Cases & Privacy</h2>
+
+<h3 class="blog-h3">Exact vs. Rounded Data</h3>
+The extension never guesses or extrapolates numbers. If a job listing payload contains an exact <code class="inline-code">applyCount</code>, it displays the exact value. If Naukri's response payload only contains a rounded range, the extension displays what is available without fabricating numbers.
+
+<h3 class="blog-h3">Zero Telemetry & Privacy-First</h3>
+I wanted this tool to be 100% private:
+<ul class="blog-ul">
+<li class="blog-li">No external backend servers.</li>
+<li class="blog-li">No analytics or tracking scripts.</li>
+<li class="blog-li">No database.</li>
+<li class="blog-li">Minimal permissions: only <code class="inline-code">storage</code> (for local extension popup options) and host permission for <code class="inline-code">naukri.com</code>. All network inspection and DOM manipulation happen locally inside the user's browser.</li>
+</ul>
+
+<hr class="blog-hr" />
+
+<h2 class="blog-h2" id="demo-video">4. Demo Video & Build Share</h2>
+
+<p class="blog-p">I posted a video walkthrough showing the extension in action on X:</p>
+
+<!-- START_X_EMBED -->
+<div class="x-embed-card">
+  <div class="x-embed-inner">
+    <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true">
+      <p lang="en" dir="ltr">Built a Chrome extension for Naukri that replaces rounded &quot;100+ Applicants&quot; badges with exact applicant counts, vacancies, and views.</p>&mdash; Aniket Kakad (@Anik3t_kakad) <a href="https://x.com/Anik3t_kakad/status/2092594612066226384?s=20">August 26, 2026</a>
+    </blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+  <a href="https://x.com/Anik3t_kakad/status/2092594612066226384?s=20" target="_blank" rel="noopener" class="x-link-btn">
+    View original post on X &rarr;
+  </a>
+</div>
+<!-- END_X_EMBED -->
+
+<hr class="blog-hr" />
+
+<h2 class="blog-h2" id="source-code">5. Source Code</h2>
+
+<p class="blog-p">The extension is open-source under the MIT license on GitHub:<br /><ul class="blog-ul"><br /><li class="blog-li"><strong>GitHub Repository</strong>: <a href="https://github.com/AniketK100/naukri-applicant-count" target="_blank" rel="noopener" class="blog-link">AniketK100/naukri-applicant-count</a></li><br /><li class="blog-li"><strong>Tech Stack</strong>: JavaScript (ES6+), Manifest V3, HTML5, CSS3.</li><br /></ul></p>
+          <div class="back-to-top-wrap">
+            <button class="back-to-top-btn" id="backToTop" aria-label="Back to top">
+              &uarr; Back to top
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-sticky-wrap">
+          <!-- TABLE OF CONTENTS (DESKTOP) -->
+          <div class="sidebar-card toc-desktop-only">
+            <span class="sidebar-title">Table of Contents</span>
+            <ul class="toc-list">
+              <li><a href="#overview"><span class="toc-num">00</span> Introduction</a></li>
+              <li><a href="#finding-the-data"><span class="toc-num">01</span> Finding the Data</a></li>
+              <li><a href="#architecture"><span class="toc-num">02</span> Extension Architecture</a></li>
+              <li><a href="#privacy"><span class="toc-num">03</span> Handling Edge Cases</a></li>
+              <li><a href="#demo-video"><span class="toc-num">04</span> Demo Video</a></li>
+              <li><a href="#source-code"><span class="toc-num">05</span> Source Code</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </article>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo">ANIKET<em>.</em></span>
+      </div>
+      <div class="footer__links">
+        <a href="https://github.com/AniketK100" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/Anik3t_kakad" target="_blank" rel="noopener">X / Twitter</a>
+        <a href="/privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Back to top scroll
+      const btn = document.getElementById('backToTop');
+      if (btn) {
+        btn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Active TOC Scroll Highlighting & Smooth Click Handling
+      const sections = document.querySelectorAll('h2[id], #overview');
+      const tocLinks = document.querySelectorAll('.toc-list a');
+
+      if (tocLinks.length) {
+        tocLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+              const targetEl = document.querySelector(targetId);
+              if (targetEl) {
+                e.preventDefault();
+                const headerOffset = 100;
+                const elementPosition = targetEl.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: 'smooth'
+                });
+                if (history.pushState) {
+                  history.pushState(null, null, targetId);
+                }
+              }
+            }
+          });
+        });
+      }
+
+      if (sections.length && tocLinks.length) {
+        function updateActiveToc() {
+          let current = '';
+          const scrollPos = window.scrollY + 120;
+
+          sections.forEach(section => {
+            if (scrollPos >= section.offsetTop) {
+              current = section.getAttribute('id');
+            }
+          });
+
+          // Special handling for bottom of the page (Section 05 / Source Code)
+          const isAtBottom = (window.innerHeight + Math.ceil(window.scrollY)) >= (document.documentElement.scrollHeight - 60);
+          if (isAtBottom && sections.length > 0) {
+            current = sections[sections.length - 1].getAttribute('id');
+          }
+
+          tocLinks.forEach(link => {
+            link.classList.remove('is-active-toc');
+            if (link.getAttribute('href') === '#' + current) {
+              link.classList.add('is-active-toc');
+            }
+          });
+        }
+
+        window.addEventListener('scroll', updateActiveToc);
+        updateActiveToc();
+      }
+    });
+  </script>
+
+  <script src="/js/analytics.js" defer></script>
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

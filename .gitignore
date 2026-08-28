@@ -1,15 +1,5 @@
 # ─────────────────────────────────────────────
-#  Logs
-# ─────────────────────────────────────────────
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# ─────────────────────────────────────────────
-#  Environment & Secrets
+#  Environment, Secrets & Keys
 # ─────────────────────────────────────────────
 .env
 .env.*
@@ -22,7 +12,16 @@ secrets.*
 *.env.production
 
 # ─────────────────────────────────────────────
-#  Dependency & Build Output
+#  Local Media & Screen Recordings (Raw Binaries)
+# ─────────────────────────────────────────────
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+
+# ─────────────────────────────────────────────
+#  Dependencies, Build & Host Cache
 # ─────────────────────────────────────────────
 node_modules/
 dist/
@@ -30,12 +29,24 @@ build/
 out/
 .next/
 .vite/
-coverage/
+.vercel/
+.turbo/
 .cache/
+coverage/
 *.tsbuildinfo
 
 # ─────────────────────────────────────────────
-#  Python
+#  Logs
+# ─────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─────────────────────────────────────────────
+#  Python & Virtual Environments
 # ─────────────────────────────────────────────
 __pycache__/
 *.py[cod]
@@ -53,7 +64,7 @@ htmlcov/
 .tox/
 
 # ─────────────────────────────────────────────
-#  OS Metadata & Editor Files
+#  OS Metadata & Filesystem Artifacts
 # ─────────────────────────────────────────────
 .DS_Store
 .DS_Store?
@@ -64,26 +75,36 @@ ehthumbs.db
 Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# ─────────────────────────────────────────────
+#  IDE, Editor & AI Agent Caches
+# ─────────────────────────────────────────────
 .idea/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.cursor/
+.windsurf/
+.gemini/
+.history/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.swp
+*.swo
 *~
-.history/
 
 # ─────────────────────────────────────────────
-#  Temporary & Backup Files
+#  Temporary & Scratch Files
 # ─────────────────────────────────────────────
 *.bak
 *.tmp
 *.temp
 *.orig
 *.rej
-scratch_*.txt
+scratch/
+scratch_*
+

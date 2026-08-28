@@ -1,0 +1,15 @@
+{
+  "title": "Naukri Shows 100+ Applicants. I Wanted the Exact Number.",
+  "slug": "naukri-exact-applicant-count",
+  "date": "2026-08-28",
+  "description": "How I built a privacy-first Manifest V3 Chrome extension to extract exact applicant counts, openings, and views hidden behind Naukri's rounded '100+ Applicants' labels.",
+  "category": "Chrome Extension",
+  "tags": ["Manifest V3", "JavaScript", "DOM Interception", "Privacy", "Reverse Engineering"],
+  "coverImage": "/assets/blog/naukri-exact-applicant-count/cover.webp",
+  "githubUrl": "https://github.com/AniketK100/naukri-applicant-count",
+  "xPostUrl": "https://x.com/Anik3t_kakad/status/2092594612066226384?s=20",
+  "author": {
+    "name": "Aniket Kakad",
+    "url": "https://anik3t.vercel.app/#person"
+  }
+}

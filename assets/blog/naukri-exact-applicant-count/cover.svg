@@ -1,0 +1,79 @@
+<svg viewBox="0 0 800 450" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" font-family="'Space Grotesk', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121216"/>
+      <stop offset="100%" stop-color="#191922"/>
+    </linearGradient>
+
+    <linearGradient id="accentGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF4D00"/>
+      <stop offset="100%" stop-color="#FF7A3D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Frame -->
+  <rect width="800" height="450" rx="16" fill="url(#cardBg)"/>
+  <rect x="1" y="1" width="798" height="448" rx="15" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5"/>
+
+  <!-- Top Window Header Bar -->
+  <path d="M 1 16 Q 1 1 16 1 L 784 1 Q 799 1 799 16 L 799 44 L 1 44 Z" fill="#1A1A22"/>
+  <line x1="1" y1="44" x2="799" y2="44" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"/>
+
+  <!-- Window Controls Dots -->
+  <circle cx="24" cy="22" r="5" fill="#FF5F56"/>
+  <circle cx="40" cy="22" r="5" fill="#FFBD2E"/>
+  <circle cx="56" cy="22" r="5" fill="#27C93F"/>
+
+  <!-- Extension Badge Title -->
+  <text x="80" y="26" fill="#A1A1AA" font-size="11" font-family="'Space Mono', monospace" font-weight="700" letter-spacing="1">NAUKRI EXACT APPLICANTS — MANIFEST V3</text>
+  
+  <rect x="650" y="12" width="130" height="20" rx="4" fill="rgba(255, 77, 0, 0.15)" stroke="#FF4D00" stroke-width="1"/>
+  <text x="715" y="26" fill="#FF4D00" font-size="10" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">CHROME EXTENSION</text>
+
+  <!-- Main Card Body Container -->
+  <g transform="translate(40, 75)">
+    <!-- Browser Mockup Window -->
+    <rect x="0" y="0" width="720" height="335" rx="12" fill="#18181E" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"/>
+
+    <!-- Job Header Block -->
+    <rect x="30" y="30" width="660" height="120" rx="10" fill="#1F1F28" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1"/>
+    
+    <text x="50" y="62" fill="#FFFFFF" font-size="20" font-weight="700">Senior Full-Stack Developer</text>
+    <text x="50" y="85" fill="#A1A1AA" font-size="13">Naukri Job Listing &bull; Posted by TechCorp &bull; 3 - 7 Yrs Exp &bull; Remote</text>
+
+    <!-- Original vs Injected Badge Comparison -->
+    <g transform="translate(50, 102)">
+      <!-- Original Label -->
+      <rect x="0" y="0" width="135" height="30" rx="6" fill="rgba(239, 68, 68, 0.1)" stroke="rgba(239, 68, 68, 0.3)" stroke-width="1"/>
+      <text x="67" y="19" fill="#EF4444" font-size="11" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle" text-decoration="line-through">100+ Applicants</text>
+
+      <!-- Arrow Indicator -->
+      <text x="152" y="20" fill="#A1A1AA" font-size="14" font-family="'Space Mono', monospace" text-anchor="middle">➜</text>
+
+      <!-- Injected Exact Badge -->
+      <rect x="170" y="0" width="165" height="30" rx="6" fill="url(#accentGlow)"/>
+      <text x="252" y="19" fill="#FFFFFF" font-size="11" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">3,781 Applicants</text>
+
+      <!-- Extra Openings Badge -->
+      <rect x="345" y="0" width="115" height="30" rx="6" fill="rgba(16, 185, 129, 0.12)" stroke="#10B981" stroke-width="1"/>
+      <text x="402" y="19" fill="#34D399" font-size="11" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">12 Openings</text>
+
+      <!-- Extra Views Badge -->
+      <rect x="470" y="0" width="115" height="30" rx="6" fill="rgba(59, 130, 246, 0.12)" stroke="#3B82F6" stroke-width="1"/>
+      <text x="527" y="19" fill="#60A5FA" font-size="11" font-family="'Space Mono', monospace" font-weight="700" text-anchor="middle">18.4k Views</text>
+    </g>
+
+    <!-- Lower Section: Extension Popup UI Overlay Mockup -->
+    <g transform="translate(30, 170)">
+      <!-- Pipeline Box -->
+      <rect x="0" y="0" width="660" height="135" rx="10" fill="#131318" stroke="rgba(255, 77, 0, 0.3)" stroke-width="1"/>
+      
+      <text x="25" y="32" fill="#FF7A3D" font-size="12" font-family="'Space Mono', monospace" font-weight="700">EXTRACTED API DATA PAYLOAD</text>
+      
+      <!-- Code JSON snippet -->
+      <rect x="25" y="44" width="610" height="72" rx="6" fill="#0C0C0F" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1"/>
+      <text x="40" y="68" fill="#34D399" font-size="12" font-family="'Space Mono', monospace">{ "applyCount": <tspan fill="#FF4D00" font-weight="700">3781</tspan>, "vacancy": <tspan fill="#FF4D00" font-weight="700">12</tspan>, "viewCount": <tspan fill="#FF4D00" font-weight="700">18450</tspan> }</text>
+      <text x="40" y="94" fill="#A1A1AA" font-size="11" font-family="'Space Mono', monospace">// Extracted via mainWorldScript.js &bull; Privacy-first &bull; 0 Telemetry</text>
+    </g>
+  </g>
+</svg>

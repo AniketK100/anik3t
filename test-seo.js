@@ -53,6 +53,22 @@ function validateHtmlPage(filePath, expected) {
     throw new Error(`H1 tag missing on ${filePath}!`);
   }
 
+  // 7b. OpenGraph & Twitter entity checks (og:site_name, twitter:creator, absolute og:image)
+  const ogSiteName = html.match(/<meta\s+property="og:site_name"\s+content="([^"]+)"/i);
+  if (!ogSiteName || ogSiteName[1] !== 'Aniket Kakad') {
+    throw new Error(`og:site_name missing or incorrect on ${filePath}! Expected "Aniket Kakad"`);
+  }
+
+  const twitterCreator = html.match(/<meta\s+name="twitter:creator"\s+content="([^"]+)"/i);
+  if (!twitterCreator || twitterCreator[1] !== '@Anik3t_kakad') {
+    throw new Error(`twitter:creator missing or incorrect on ${filePath}! Expected "@Anik3t_kakad"`);
+  }
+
+  const ogImage = html.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i);
+  if (!ogImage || !ogImage[1].startsWith('https://')) {
+    throw new Error(`og:image missing or not an absolute HTTPS URL on ${filePath}! Got "${ogImage ? ogImage[1] : 'NONE'}"`);
+  }
+
   // 8. JSON-LD validation (if required)
   if (expected.schemaType) {
     const jsonLdMatch = html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i);
@@ -119,6 +135,22 @@ function validateHtmlPage(filePath, expected) {
       if (JSON.stringify(person).toLowerCase().includes('linkedin')) {
         throw new Error(`LinkedIn must NOT be present in Person entity on ${filePath}!`);
       }
+
+      if (!Array.isArray(person.alternateName) || !person.alternateName.includes('Anik3t')) {
+        throw new Error(`Person alternateName missing or invalid on ${filePath}! Got: ${JSON.stringify(person.alternateName)}`);
+      }
+    }
+
+    // Special verification for Homepage Person entity
+    if (expected.schemaType === 'Person') {
+      const personEntities = graph.filter(item => item['@type'] === 'Person');
+      if (personEntities.length !== 1) {
+        throw new Error(`Expected exactly 1 Person entity in graph on ${filePath}, found ${personEntities.length}!`);
+      }
+      const person = personEntities[0];
+      if (!Array.isArray(person.alternateName) || !person.alternateName.includes('Anik3t')) {
+        throw new Error(`Person alternateName missing on homepage! Got: ${JSON.stringify(person.alternateName)}`);
+      }
     }
   }
 
@@ -146,6 +178,7 @@ function validate404Page() {
     '/llms.txt',
     '/sitemap.xml',
     '/about',
+    '/blog/',
     '/contact',
     'https://anik3t.vercel.app/'
   ];
@@ -208,6 +241,8 @@ function validateLlmsTxt() {
     'https://github.com/AniketK100',
     'https://x.com/Anik3t_kakad',
     'https://anik3t.vercel.app/about',
+    'https://anik3t.vercel.app/blog/',
+    'https://anik3t.vercel.app/blog/naukri-exact-applicant-count/',
     'https://anik3t.vercel.app/contact'
   ];
   requiredUrls.forEach(url => {
@@ -223,6 +258,39 @@ function validateLlmsTxt() {
   console.log('✓ llms.txt verified cleanly');
 }
 
+function validateRobotsTxt() {
+  const robotsPath = path.join(__dirname, 'robots.txt');
+  if (!fs.existsSync(robotsPath)) {
+    throw new Error('robots.txt does not exist at root!');
+  }
+  const content = fs.readFileSync(robotsPath, 'utf8');
+  if (!content.includes('User-agent: *')) {
+    throw new Error('robots.txt missing User-agent: * directive!');
+  }
+  if (!content.includes('Allow: /')) {
+    throw new Error('robots.txt missing Allow: / directive!');
+  }
+  if (!content.includes('Sitemap: https://anik3t.vercel.app/sitemap.xml')) {
+    throw new Error('robots.txt missing Sitemap directive!');
+  }
+  console.log('✓ robots.txt verified cleanly');
+}
+
+function validateSitemapXml() {
+  const sitemapPath = path.join(__dirname, 'sitemap.xml');
+  if (!fs.existsSync(sitemapPath)) {
+    throw new Error('sitemap.xml does not exist at root!');
+  }
+  const content = fs.readFileSync(sitemapPath, 'utf8');
+  if (!content.includes('<loc>https://anik3t.vercel.app/</loc>')) {
+    throw new Error('sitemap.xml missing homepage loc!');
+  }
+  if (!content.includes('<loc>https://anik3t.vercel.app/privacy</loc>')) {
+    throw new Error('sitemap.xml missing privacy loc!');
+  }
+  console.log('✓ sitemap.xml verified cleanly');
+}
+
 function runAllSeoTests() {
   console.log('=== RUNNING COMPREHENSIVE ROUTE, SEO, PROFILEPAGE, LLMS.TXT & 404 TEST SUITE ===\n');
 
@@ -230,7 +298,15 @@ function runAllSeoTests() {
   validateLlmsTxt();
   console.log('');
 
-  // 2. Validate 404 Page
+  // 2. Validate robots.txt
+  validateRobotsTxt();
+  console.log('');
+
+  // 3. Validate sitemap.xml
+  validateSitemapXml();
+  console.log('');
+
+  // 4. Validate 404 Page
   validate404Page();
   console.log('');
 
@@ -266,7 +342,23 @@ function runAllSeoTests() {
     schemaType: 'WebPage'
   });
 
-  console.log('\n=== ALL ROUTE, SEO, PROFILEPAGE, LLMS.TXT & 404 CHECKS PASSED SUCCESSFULLY ===');
+  // 7. Validate Blog Index Page
+  validateHtmlPage(path.join(__dirname, 'blog', 'index.html'), {
+    name: 'Blog Index',
+    title: 'Blog — Aniket Kakad | Full-Stack Developer',
+    canonical: 'https://anik3t.vercel.app/blog/',
+    schemaType: 'CollectionPage'
+  });
+
+  // 8. Validate Naukri Extension Blog Article Page
+  validateHtmlPage(path.join(__dirname, 'blog', 'naukri-exact-applicant-count', 'index.html'), {
+    name: 'Naukri Article',
+    title: 'Naukri Shows 100+ Applicants. I Wanted the Exact Number. — Aniket Kakad',
+    canonical: 'https://anik3t.vercel.app/blog/naukri-exact-applicant-count/',
+    schemaType: 'BlogPosting'
+  });
+
+  console.log('\n=== ALL ROUTE, SEO, PROFILEPAGE, BLOG, LLMS.TXT & 404 CHECKS PASSED SUCCESSFULLY ===');
 }
 
 runAllSeoTests();
